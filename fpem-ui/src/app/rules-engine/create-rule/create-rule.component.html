@@ -1,0 +1,395 @@
+<h6 style="color: #FF9966;text-align: center;margin-bottom: 2%">
+    CREATE RULE</h6>
+<div class="row">
+    <div class="col-6 text-right">
+        <mat-form-field>
+            <mat-label>SELECT EVENT LAYOUT</mat-label>
+            <select matNativeControl [(ngModel)]="this.selectedlayout" (change)="selectLayouts(this.selectedlayout)" name="LayoutSelect" data-toggle="tooltip" title="Select Event Layout">
+    
+                <option *ngFor="let eventLayout of eventLayouts;let i=index" [(ngValue)]="eventLayout"><b>{{eventLayout.event_layout_name}}</b>
+                </option>
+            </select>
+        </mat-form-field>
+    </div>
+
+    <div class="col-6 text-left">
+
+        <button style="width: 134.42px; font-size: 14px;color: white" type="button" class="btn btn-success" (click)="compile()" data-toggle="tooltip" title="Test Your Rule.">Compile</button>
+    </div>
+
+
+
+</div>
+<br>
+
+
+
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title data-toggle="tooltip" title="Expand for Rule Information.">
+                <b style="color: rgb(79, 63, 221);">Rule Information </b>
+                <p style="color:red;"> {{error}}</p>
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="row">
+
+
+
+
+            <div class="modal-body" class="col-lg-12">
+
+                <div class="row">
+                    <div class="col-1.5" id="ii" style="max-width: 131px !important">
+                        <label>
+                                    
+                                         <h6> <b>  Priority:</b> </h6> 
+                                    </label>
+                    </div>
+                    <div class="col-3" id="event">
+                        <input class="form-control" [(ngModel)]="priority">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="ii" class="col-1.5" style="max-width: 131px !important">
+                        <label>
+                            <h6><b>Rule Name:</b></h6>
+                        </label>
+                    </div>
+                    <div id="event" class="col-3">
+                        <input [(ngModel)]="rule_name" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </mat-expansion-panel>
+
+</mat-accordion>
+<br>
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title data-toggle="tooltip" title="Expand for Selection Criteria.">
+                <b style="color: rgb(79, 63, 221);">Selection Criteria </b>
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <div class="row">
+
+            <div class="modal-body" class="col-lg-12" id="expansion-body">
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <button type="button" class="btn btn-info" (click)="whenfields()" data-toggle="tooltip" title="Add Condition."><i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let obj of rule.when; let i = index" class="row">
+                    <div style="width:15%;margin-left:2%;margin-top: 15px">
+                        <div *ngIf="!(i =='0')">
+                            <mat-form-field>
+                                <mat-label>Select Condition</mat-label>
+                                <select matNativeControl [(ngModel)]="this.rule.when[i].condition">
+
+                                    <option *ngFor="let obj of this.Condition">{{obj}}
+                                    </option>
+                                </select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div style="width:10%;margin-left:2%;margin-top: 20px">
+
+                        <select [(ngModel)]="this.rule.when[i].fields.leftfunction" (change)="ValueSelected(i)" class="form-control">
+                            <option *ngFor="let options of CeiteriaOptions">{{options}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.leftfunction === 'static (String,Date)'">
+                        <input [(ngModel)]="this.rule.when[i].fields.key" class="form-control">
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.leftfunction === 'static (Number)'">
+                        <input [(ngModel)]="this.rule.when[i].fields.key" class="form-control">
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.leftfunction === 'static (Double)'">
+                        <input [(ngModel)]="this.rule.when[i].fields.key" class="form-control">
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.leftfunction === 'expression'">
+                        <input [(ngModel)]="this.rule.when[i].fields.key" class="form-control">
+                    </div>
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.leftfunction === 'lookup'">
+                        <select [(ngModel)]="this.rule.when[i].fields.leftlookup" class="form-control">
+                            <option *ngFor="let lookupname of rulelookup">{{lookupname}}
+                            </option>
+                        </select>
+
+
+                    </div>
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.leftfunction === 'lookup'">
+
+                        <select [(ngModel)]="this.rule.when[i].fields.key" class="form-control" style="margin-left: 5px  ">
+                            <option *ngFor="let whenConfigValue of whenConfig[0];let i=index" >{{whenConfigValue}} -
+                                {{whenConfig[1][i]}}
+                        </select>
+
+
+                    </div>
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.leftfunction === 'field'">
+                        <select [(ngModel)]="this.rule.when[i].fields.key" class="form-control">
+                            <option *ngFor="let whenConfigValue of whenConfig[0];let i=index">{{whenConfigValue}} -
+                                {{whenConfig[1][i]}}
+                            </option>
+                        </select>
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px">
+                        <select [(ngModel)]="this.rule.when[i].fields.operator" class="form-control" (change)="ValueSelectedright(i)">
+                            <option *ngFor="let whenCon of whenCondition">{{whenCon}}</option>
+                        </select>
+                    </div>
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px">
+                        <select [(ngModel)]="this.rule.when[i].fields.rightfunction" class="form-control">
+                            <option *ngFor="let options of CeiteriaOptions">{{options}}
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.rightfunction === 'static (Double)'">
+                        <input [(ngModel)]="this.rule.when[i].fields.value" class="form-control">
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.rightfunction === 'static (String,Date)'">
+                        <input [(ngModel)]="this.rule.when[i].fields.value" class="form-control">
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.rightfunction === 'static (Number)'">
+                        <input [(ngModel)]="this.rule.when[i].fields.value" class="form-control">
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.rightfunction === 'expression'">
+                        <input [(ngModel)]="this.rule.when[i].fields.value" class="form-control">
+                    </div>
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.rightfunction === 'lookup'">
+                        <select [(ngModel)]="this.rule.when[i].fields.rightlookup" class="form-control">
+                            <option *ngFor="let lookupname of rulelookup">{{lookupname}}
+                            </option>
+                        </select>
+
+
+                    </div>
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.rightfunction === 'lookup'">
+
+                        <select [(ngModel)]="this.rule.when[i].fields.value" class="form-control" style="margin-left: 5px  ">
+                            <option *ngFor="let whenConfigValue of whenConfig[0];let i=index">{{whenConfigValue}} -
+                                {{whenConfig[1][i]}}
+                        </select>
+
+
+                    </div>
+
+                    <div style="width:10%;margin-left:1%;margin-top: 20px" *ngIf="this.rule.when[i].fields.rightfunction === 'field'">
+                        <select class="form-control" [(ngModel)]="this.rule.when[i].fields.value">
+                            <option *ngFor="let whenConfigValue of whenConfig[0];let i=index">{{whenConfigValue}} -
+                                {{whenConfig[1][i]}}
+                            </option>
+                        </select>
+                    </div>
+                    <div style="width:4%;margin-left:1%;margin-top: 20px">
+                        <button type="button" class="btn btn-danger " (click)="cancelwhen(i)" data-toggle="tooltip" title="Delete Condition."><i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </mat-expansion-panel>
+
+</mat-accordion>
+<br>
+<mat-accordion style="overflow-y: auto;">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title data-toggle="tooltip" title="Expand for Action.">
+                <b style="color: rgb(79, 63, 221);"> Action</b>
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="row">
+
+            <div class="modal-body" class="col-lg-12" id="expansion-body">
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <button type="button" class="btn btn-info" (click)="plusthen()" data-toggle="tooltip" title="Add a New File."><i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <mat-accordion style="margin-left:2% ;" *ngFor="let obj of rule.then; let i = index" class="row">
+                    <mat-expansion-panel style="width: 100%;">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <b *ngIf="this.rule.then[i].outObj=='Journal'" style="color:rgb(108, 45, 190);">Selected
+                                    File Name- Journal</b>
+                                <b *ngIf="this.rule.then[i].outObj=='Sal'" style="color:rgb(108, 45, 190);">Selected
+                                    File Name- Arrangement</b>
+                                <b *ngIf="this.rule.then[i].outObj=='Audit'" style="color:rgb(108, 45, 190);">Selected
+                                    File Name- Audit Record</b>
+                                <b *ngIf="this.rule.then[i].outObj=='Ip'" style="color:rgb(108, 45, 190);">Selected
+                                    File Name- Involve Party</b>
+                                <b *ngIf="this.rule.then[i].outObj==''||this.rule.then[i].outObj==undefined" style="color:rgb(108, 45, 190);">Selected File Name- </b>
+
+
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                            <div style="width: 14%;margin-left: 2%;margin-top: 15px" id="expansion-body">
+
+                                <select class="form-control" [(ngModel)]="this.rule.then[i].outObj" (change)=" eventChangeThen(i)" data-toggle="tooltip" title="Select Your File Type.">
+                                    <option *ngFor="let obj of outObj; let k= index">{{obj}}
+                                    </option>
+                                </select>
+
+                            </div>
+                            <div style="margin-top: 15px;margin-left: 2%">
+                                <button type="button" class="btn btn-info" (click)="plusAssignment(i)"><i
+                                        data-toggle="tooltip" title="Add Column." class="fa fa-plus"
+                                        aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div style="margin-top: 15px;margin-left: 2%;">
+                                <button type="button" class="btn btn-danger " (click)="cancelselect(i)" data-toggle="tooltip" title="Delete File."><i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                            <div style="margin-top: 15px ;margin-left: 2%;">
+                                <button type="button" class="btn btn-primary" (click)="copyaction(i)" data-toggle="tooltip" title="Replicate File."><i class="fa fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div *ngFor="let obj1 of rule.then[i].assignments; let j = index" style="width: 100%; margin-top:5px" class="row">
+
+                            <div style="width: 25%;margin-left: 7%">
+
+
+                                <select class="form-control" [(ngModel)]="this.rule.then[i].assignments[j].key" (change)=" newThenRow(i,j)">
+                                    <option *ngFor="let obj1 of thenConfig[i]; let k= index"
+                                        [disabled]="this.thenConfigDis[i][k]">{{obj1}}
+                                    </option>
+                                </select>
+
+
+
+                            </div>
+                            <div style="width:5%">
+                                <h4 id="arrow"><i class="fa fa-arrow-left"></i></h4>
+                            </div>
+                            <div style="width: 25%">
+
+
+
+                                <ng-select [items]="thenValueOptions" placeholder="Select fields" [(ngModel)]="this.rule.then[i].assignments[j].value" (change)="ValueSelect(i,j)">
+
+
+                                </ng-select>
+
+
+                            </div>
+                            <div style="width: 25%;margin-left: 2%" *ngIf="this.rule.then[i].assignments[j].value === 'static'">
+                                <input class="form-control" [(ngModel)]="this.rule.then[i].assignments[j].newValue">
+                            </div>
+                            <div style="width: 25%;margin-left: 2%" *ngIf="this.rule.then[i].assignments[j].value === 'expression'">
+                                <input class="form-control" [(ngModel)]="this.rule.then[i].assignments[j].newValue">
+                            </div>
+                            <div style="width: 12%;margin-left: 2%" *ngIf="this.rule.then[i].assignments[j].value === 'lookup'">
+
+
+                                <ng-select [items]="rulelookup" placeholder="" [(ngModel)]="this.rule.then[i].assignments[j].lookupValue">
+
+
+                                </ng-select>
+
+
+
+
+                            </div>
+
+                            <div style="width: 14%;margin-left: 2%" *ngIf="this.rule.then[i].assignments[j].value === 'lookup'">
+
+
+
+                                <ng-select [items]="whenConfig[0]" placeholder=" " [(ngModel)]="this.rule.then[i].assignments[j].newValue">
+
+
+                                </ng-select>
+
+
+
+                            </div>
+
+
+                            <div style="width: 25%;margin-left: 2%" *ngIf="this.rule.then[i].assignments[j].value === 'field'">
+
+
+                                <ng-select [items]="whenConfig[0]" placeholder=" " [(ngModel)]="this.rule.then[i].assignments[j].newValue">
+
+
+                                </ng-select>
+                            </div>
+
+
+                            <div style="width: 5%;margin-left: 2%">
+                                <button type="button" class="btn btn-danger " id="delete" (click)="cancelthen(i,j)" data-toggle="tooltip" title="Delete Column."><i
+                                        class="fa fa-trash"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <br>
+
+                    </mat-expansion-panel>
+
+                </mat-accordion>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+    </mat-expansion-panel>
+
+</mat-accordion>
+<br>
+
+<div class="row">
+
+
+    <button style="margin-left:40% ;width: 134.42px;font-size: 14px;margin-right: 2%;" type="button" class="btn btn-primary" (click)="SaveModifyRule()" data-dismiss="modal" data-toggle="tooltip" title="Save Your Rule.">Save</button>
+
+    <button type="button" style="width: 134.42px;font-size: 14px;color: white" class="btn btn-info" (click)="Goback()" data-toggle="tooltip" title="Go Back To Rule Page.">Go Back</button>
+
+
+</div>
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

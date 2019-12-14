@@ -1,0 +1,289 @@
+<div class="table-container ">
+
+    <div class="row">
+        <div class="col-4">
+            <mat-form-field style="margin-left: 2%">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+        <div class="col-4 text-center">
+            <h6 style="   color: #ff9966">DEFINE REFERENCE DATA</h6>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-link" data-toggle="modal" data-target="#addModal" data-backdrop="false" style="float: right;margin-top: 1%"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add New</button>
+
+        </div>
+    </div>
+
+    <div class="example-container mat-elevation-z1">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="reference_file_name_business">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>File Name</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element">
+                    {{ element.reference_file_name_business}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="reference_file_type">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>File Type</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                    {{ element.reference_file_type }} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef><b>Edit</b> </th>
+
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+
+                    <button class="btn btn-warning" type="button" id="btn1" data-toggle="modal" data-target="#editModal" data-backdrop="false" (click)="edit(element,i)"><i class="fa fa-edit"
+                            aria-hidden="true"></i></button>
+
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef><b>Delete</b> </th>
+
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                    <button class="btn btn-danger" (click)="deleteRefFile(element,i)"><i class="fa fa-trash"
+                            aria-hidden="true"></i></button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+</div>
+
+<div class="modal" id="addModal">
+    <div class="modal-dialog modal-xl">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Create New Reference File</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modals">
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <h6>Enter File Business Name : </h6>
+
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" [(ngModel)]="reference_file_name_business">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <h6>Select File Type : </h6>
+
+                    </div>
+                    <div class="col-6">
+                        <select class="form-control" [(ngModel)]="reference_file_type">
+                            <option ngValue="Code-Value">Code-Value</option>
+                            <option ngValue="Code-Values">Code-Values</option>
+                            <option ngValue="Hierarchy">Hierarchy</option>
+                        </select>
+
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <button type="button" style="margin-right:5% ;" id="plus" class="btn btn-success btn-circle" (click)="addField()" data-toggle="tooltip" title="Add Fields."><i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="col-6 text-left">
+                        <button class="btn btn-info" (click)="addNewReferenceFile()">
+                            Save
+                        </button>
+                    </div>
+
+
+                </div>
+                <br>
+                <div class="row" style="background-color:rgb(58, 183, 255);">
+                    <div class="col-4 text-center"><b>S.No.</b></div>
+                    <div class="col-4 text-center"><b>Business Name</b></div>
+
+                    <div class="col-4 text-center"><b>Action</b></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div cdkDropList class="col-12" (cdkDropListDropped)="dropFields($event)">
+
+
+
+
+                        <div class="example-box" class=" row" *ngFor="let obj1 of selectedFields; let i= index" cdkDrag>
+
+
+                            <br>
+                            <br>
+
+                            <div class="col-4 text-center">
+                                <b>{{i}} .</b>
+                            </div>
+                            <div class="col-4">
+
+
+                                <ng-select [items]="fields" bindLabel="business_field_name" bindValue="field_id" [multiple]="false" placeholder="Select Fields" [(ngModel)]="selectedFields[i].field_id" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false"
+                                    name="field_name">
+                                </ng-select>
+
+                            </div>
+
+
+
+
+                            <div class="col-2">
+                                <button type="button" class="btn btn-danger btn-circle" id="delete" (click)="deleteField(i)"><i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+
+                            <div class="col-2 example-handle" cdkDragHandle>
+                                <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+                                    </path>
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                            </div>
+                            <br>
+                            <br>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="editModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Create New Reference File</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modals">
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <h6>Enter File Business Name : </h6>
+
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" [(ngModel)]="reference_file_name_business">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <h6>Select File Type : </h6>
+
+                    </div>
+                    <div class="col-6">
+                        <select class="form-control" [(ngModel)]="reference_file_type">
+                            <option ngValue="Code-Value">Code-Value</option>
+                            <option ngValue="Code-Values">Code-Values</option>
+                            <option ngValue="Hierarchy">Hierarchy</option>
+                        </select>
+
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <button type="button" style="margin-right:5% ;" id="plus" class="btn btn-success btn-circle" (click)="addField()" data-toggle="tooltip" title="Add Fields."><i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="col-6 text-left">
+                        <button class="btn btn-info" (click)="updateReferenceFile()">
+                            Save
+                        </button>
+                    </div>
+
+
+                </div>
+                <br>
+                <div class="row" style="background-color:rgb(174, 208, 228);">
+                    <div class="col-4 text-center"><b>S.No.</b></div>
+                    <div class="col-4 text-center"><b>Business Name</b></div>
+
+                    <div class="col-4 text-center"><b>Action</b></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div cdkDropList class="col-12" (cdkDropListDropped)="dropFields($event)">
+
+
+                        <br>
+
+                        <div class="example-box" class="row" *ngFor="let obj1 of selectedFields; let i= index" cdkDrag>
+
+
+                            <br>
+                            <br>
+
+                            <div class="col-4 text-center">
+                                <b>{{i}} .</b>
+                            </div>
+                            <div class="col-4">
+
+
+                                <ng-select [items]="fields" bindLabel="business_field_name" bindValue="field_id" [multiple]="false" placeholder="Select Fields" [(ngModel)]="selectedFields[i].field_id" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false"
+                                    name="field_name">
+                                </ng-select>
+
+                            </div>
+
+
+
+
+                            <div class="col-2">
+                                <button type="button" class="btn btn-danger btn-circle" id="delete" (click)="deleteField(i)"><i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+
+                            <div class="col-2 example-handle" cdkDragHandle>
+                                <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+                                    </path>
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                            </div>
+                            <br>
+                            <br>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

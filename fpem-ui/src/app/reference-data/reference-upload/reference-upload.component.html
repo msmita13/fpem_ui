@@ -1,0 +1,140 @@
+
+<div class="row">
+<h6 style="color: #ff9966;margin-left: auto;margin-right: auto">UPLOAD REFERENCE DATA</h6>
+
+</div>
+<div class="row" style="margin-right: 2%;margin-left:2%">
+        <div class="col-2">
+            <mat-form-field style="margin-left: 2%">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+        
+
+        <div class="col" style="padding-left: 5%">
+                <button style="margin-bottom: 1%;float: right;margin-left: 1%" class="btn btn-primary" (click)="refresh()">Refresh
+                        Page</button> 
+                <button class="btn btn-success" data-toggle="modal" data-target="#uploadfile" data-backdrop="false" style="
+                margin-bottom: 1%;float: right"><i class="fa fa-upload"></i>Upload File</button>  
+        </div>
+    </div>
+<div class="example-container mat-elevation-z1">
+<table style="width: 100%" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="file_name" sticky>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>File Name</b>
+            </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.file_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="table_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>
+                    Reference Data Name</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.business_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="error_msg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>
+                    State</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.msg}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="padding-left: 75px">
+                <b>Action</b></th>
+            <td mat-cell flex-stretch *matCellDef="let element; let i= index">
+                <button style="width:120px" class="btn btn-success" *ngIf="(element.is_processed=='0')" (click)="process(i,element)">Process</button>&nbsp;
+
+                <button style="width: 120px;" class="btn btn-danger" (click)="deleteUploadedFile(i,element)">Delete</button>
+
+
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="process_ts">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="padding-left: 25px"> <b>
+                    Last Action TimeStamp</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.process_ts}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
+<div class="modal" id="uploadfile">
+    <div class="modal-dialog  modal-dialog-centered ">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Reference File</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <ng-select [items]="files" bindLabel="reference_file_name_business" bindValue="reference_file_name_business" [multiple]="false" placeholder="Select Reference Data" [(ngModel)]="this.selectItem" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                            [closeOnSelect]="true" name="Reference_data" (change)="changeReferenceData($event)" style="margin-left: 25%;width: 50%">
+                        </ng-select>
+
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked" style="margin-left: 30%;
+                        ">Header Included</mat-checkbox>
+
+                    </div>
+                    <div *ngIf="Is_show">
+                        <h6>Please Use Below Columns in File with Header</h6>
+                        <div class="row" *ngFor="let item of cols[ref_id]; let i=index" style="margin-left: 27%;color: brown">
+                            <h6><b>{{i}}. {{item}}</b></h6>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col" style="align-items: center">
+                            <input #file type="file" name="File" ng2FileSelect [uploader]="uploader" class="form-control" style="border-color: black" (click)="onclick($event)">
+                        </div>
+                        <div class="col" style="text-align:rights">
+                            <button type="button" [disabled]="!uploader?.getNotUploadedItems().length" class="btn btn-success" (click)='uploadfile()' style="margin: 0px; width: 134.42px;
+                                    height: 43px;
+                                   font-size: 14px;"><i class="fa fa-upload"
+                                    aria-hidden="true">&nbsp;</i>Upload</button>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal" id="progress_bar">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="progress" style="margin-bottom: 0;">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': barwidth + '%' }">
+                        {{barwidth}}% Complete
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner type="ball-atom"></ngx-spinner>

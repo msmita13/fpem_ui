@@ -1,0 +1,60 @@
+nav {
+    background-color: #4634e6!important;
+}
+
+.input-group {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn{
+  background-color: rgb(30, 126, 236);
+}
+ .modal.left .modal-dialog {
+        position: fixed;
+        margin: auto;
+        width: 320px;
+        height: 100%;
+ 
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+      }
+      
+      .modal.left .modal-content {
+        height: 100%;
+      
+      }
+      
+      .modal.left .modal-body {
+        padding: 15px 15px 80px;
+       
+        overflow-y: visible
+      }
+      
+      .modal.left.fade .modal-dialog {
+        left: -320px;
+        -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+        -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+        -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+        transition: opacity 0.3s linear, left 0.3s ease-out;
+      }
+      
+      .modal.left.fade.show .modal-dialog {
+        left: 0;
+      }
+   
+
+    .dropdown-toggle:after { content: none }
+
+    .dropdown:hover>.dropdown-menu {
+        display: block;
+        top: 0;
+         left: 100% ;
+         z-index: 999;
+      }
+.dropdown:hover{
+    background-color: lightgrey;
+    color: white
+}

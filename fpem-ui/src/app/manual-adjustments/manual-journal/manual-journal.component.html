@@ -1,0 +1,67 @@
+<div style="margin-left:45% ;">
+    <h2>Header</h2>
+</div>
+
+<br>
+<div class="row">
+    <div class="col-4">
+        <div class="row" *ngFor="let data of journal_header_field ;let i= index">
+            <div class="col-6" *ngIf="i%3==0"> {{data.business_field_name}}</div>
+            <div class="col-6" *ngIf="i%3==0">
+                <input type="text" class="form-control" placeholder=" {{data.business_field_name}}" [(ngModel)]="this.header[data.business_field_name]" />
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row" *ngFor="let data of journal_header_field ;let i= index">
+            <div class="col-6" *ngIf="i%3==1"> {{data.business_field_name}}</div>
+            <div class="col-6" *ngIf="i%3==1">
+                <input type="text" class="form-control" placeholder=" {{data.business_field_name}}" [(ngModel)]="this.header[data.business_field_name]" />
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row" *ngFor="let data of journal_header_field ;let i= index">
+            <div class="col-6" *ngIf="i%3==2"> {{data.business_field_name}}</div>
+            <div class="col-6" *ngIf="i%3==2">
+                <input type="text" class="form-control" placeholder=" {{data.business_field_name}}" [(ngModel)]="this.header[data.business_field_name]" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+
+<div style="margin-left:47% ;">
+    <h2>Line</h2>
+</div>
+<div style="margin-left:40%;">
+    <button style="margin-left: 10%;margin-bottom: 1%;font-weight: 700" class="btn btn-outline-primary" (click)="add()">Add Line</button>
+</div>
+<div style="overflow: scroll;">
+
+
+
+    <table style="overflow: auto;">
+
+        <tr>
+            <th *ngFor="let data1 of TotalTableFields" style="min-width:200px">{{data1}}</th>
+        </tr>
+        <br>
+        <tr *ngFor="let table_data_itr of table_data; let i = index;">
+            <td *ngFor="let data of TotalTableFields ; let j= index;"> <input type="text" class="form-control" placeholder="{{data}}" [(ngModel)]="table_data_itr[data]" /></td>
+            <button style="margin-left: 10%;margin-bottom: 1%;font-weight: 700" class="btn btn-danger" (click)="delete(i)">Delete</button>
+
+        </tr>
+
+
+    </table>
+</div>
+<br>
+
+<div style="margin-left:40%;">
+    <button style="margin-left: 10%;margin-bottom: 1%;font-weight: 700" class="btn btn-primary" (click)="submit()">Submit</button>
+</div>
+
+<ngx-spinner type="ball-atom">Loading...</ngx-spinner>

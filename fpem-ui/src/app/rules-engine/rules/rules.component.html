@@ -1,0 +1,178 @@
+<h6 style="color: #ff9966;text-align: center">RULE LIST</h6>
+<div class="row">
+    <div style="width: 32%; margin-left: 2%">
+        <mat-form-field style="margin-left: 2%">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div>
+    <div style="width: 15%;margin-top: 10px;margin-left: 10%">
+
+
+
+        <select [(ngModel)]="this.selectedlayout" (change)="selectLayouts()" name="LayoutSelect" class="form-control">
+
+                <option *ngFor="let eventLayout of eventLayouts;let i=index" [(ngValue)]="eventLayout">{{eventLayout.event_layout_name}}
+                </option>
+            </select>
+
+
+    </div>
+    <div style="width: 13%;margin-left: 25%">
+        <!--  <button style="margin-top: 10px; margin-right:20px; " class="btn btn-primary" (click)="add()"><i class="fa fa-plus"></i></button> -->
+        <button style="margin-top: 10px;width: 134.42px;height: 43px;font-size: 14px;margin-left: 32%" class="btn btn-info" data-toggle="modal" data-target="#replicate" data-backdrop="false" (click)="replicate()">Replicate</button>
+    </div>
+
+</div>
+<div class="row ">
+    <div class="col-12">
+        <div class="example-container mat-elevation-z1 ">
+
+
+
+
+            <table style="width:100%" mat-table [dataSource]="dataSource" matSort>
+
+
+                <ng-container matColumnDef="priority">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Priority</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.priority}} </td>
+                </ng-container>
+                <ng-container matColumnDef="rule_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Rule Name</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.rule_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="modify">
+                    <th mat-header-cell *matHeaderCellDef><b>Modify</b> </th>
+
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                        <button class="btn btn-primary" (click)="modify(element,i)">Modify</button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef><b>Status</b> </th>
+
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                        <div *ngIf="element.status ==='1'">
+                            <button style="width: 100px" class="btn btn-warning" (click)="changeStatus(element,i,0)">Deactivate</button></div>
+                        <div *ngIf="element.status ==='0'|| element.status ===''">
+                            <button style="width: 100px" class="btn" style="background-color: #11CDEF;color: white" (click)="changeStatus(element,i,1)">Activate</button></div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef><b>Delete</b> </th>
+
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                        <button class="btn btn-danger" (click)="delete(element,i)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- <div class="modal" id="addNewRule">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Rule</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="ii">
+                        <label>
+                            <h4>Priority:</h4>
+                        </label>
+                    </div>
+                    <div id="event">
+                        <input [(ngModel)]="this.priority" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="ii">
+                        <label>
+                            <h4>Rule Name:</h4>
+                        </label>
+                    </div>
+                    <div id="event">
+                        <input [(ngModel)]="this.rule_name" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button style="margin-right: 10px" type="button" class="btn btn-primary" (click)="addnewrule()" data-dismiss="modal">Add</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="modal" id="replicate">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Replicate a Rule</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div id="ii">
+                        <label>
+                            <h4>Select Old Rule:</h4>
+                        </label>
+                    </div>
+                    <div id="event">
+                        <select class="form-control" [(ngModel)]="old_rule">
+                            <option *ngFor="let rule of data" [(ngValue)]="rule">{{rule.rule_name}}</option>
+                        </select>
+                        <!-- <ng-select [items]="data" bindLabel="rule_name" [(ngModel)]="old_rule"> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="ii">
+                        <label>
+                            <h4>New Priority:</h4>
+                        </label>
+                    </div>
+                    <div id="event">
+                        <input [(ngModel)]="this.priority" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="ii">
+                        <label>
+                            <h4>New Rule Name:</h4>
+                        </label>
+                    </div>
+                    <div id="event">
+                        <input [(ngModel)]="this.rule_name" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button style="margin-right: 10px" type="button" class="btn btn-primary" (click)="replicateRule()" data-dismiss="modal">Add</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner type="ball-atom"></ngx-spinner>

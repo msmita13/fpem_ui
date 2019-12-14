@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <mat-form-field>
+            <mat-label>Select Event</mat-label>
+            <select matNativeControl [(ngModel)]="this.selectedevent" (change)="changeEvents(this.selectedevent)" name="EventSelect" data-toggle="tooltip" title="Select Event Name">
+                <option *ngFor="let event of allevent;let i=index" [(ngValue)]="event"><b>{{event.src_event_desc}}</b>
+                </option>
+            </select>
+        </mat-form-field>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-4">
+        <div class="row" *ngFor="let data of eventFields ;let i= index">
+            <div class="col-6" *ngIf="i%3==0"> {{data.business_field_name}}</div>
+            <div class="col-6" *ngIf="i%3==0">
+                <input type="text" class="form-control" placeholder="{{data.business_field_name}}" [(ngModel)]="this.event[data.business_field_name]" />
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row" *ngFor="let data of eventFields  ;let i= index">
+            <div class="col-6" *ngIf="i%3==1"> {{data.business_field_name}}</div>
+            <div class="col-6" *ngIf="i%3==1">
+                <input type="text" class="form-control" placeholder="{{data.business_field_name}}" [(ngModel)]="this.event[data.business_field_name]" />
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row" *ngFor="let data of eventFields ;let i= index">
+            <div class="col-6" *ngIf="i%3==2"> {{data.business_field_name}}</div>
+            <div class="col-6" *ngIf="i%3==2">
+                <input type="text" class="form-control" placeholder="{{data.business_field_name}}" [(ngModel)]="this.event[data.business_field_name]" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="col-12 text-center">
+    <button style="margin-left: 10%;margin-bottom: 1%;font-weight: 700" class="btn btn-outline-primary" (click)="addLine()">Add</button>
+</div>
+
+<div class="row ">
+    <div class="col-12">
+        <div class="example-container mat-elevation-z2 ">
+            <table style="width:100%" mat-table [dataSource]="dataSource" matSort>
+
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Index</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;"> {{i}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="src_event_code">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Event Code</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.src_event_code}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="update">
+                    <th mat-header-cell *matHeaderCellDef><b>Update</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                        <button class="btn btn-primary" (click)="update(i)"><i class="fas fa-edit"></i></button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef><b>Delete</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                        <button class="btn btn-danger" (click)="delete(i)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="col-12 text-center">
+    <button style="margin-left: 10%;margin-bottom: 1%;font-weight: 700" class="btn btn-primary" (click)="submit()">Submit</button>
+</div>
+<ngx-spinner type="ball-atom">Loading...</ngx-spinner>

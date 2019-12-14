@@ -1,0 +1,44 @@
+
+<div class="page-content fade-in-up" >
+       
+        <div class=" table-container ">
+
+               <h6 >PROCESSING</h6>
+    <div  class="mat-elevation-z1 ">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                     <th scope="col">#</th>
+
+                     <th scope="col">Process Code</th>
+                    <th scope="col">Process Name</th>
+                     <th scope="col">State</th> 
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let process of  this.allProcess">
+                   <td>{{process.id}}</td>
+                   <td>{{process.process_code}}</td>
+                    <td>{{process.process_name}}</td>
+                 
+                   <td>
+ <mat-slide-toggle [checked]="process.status=='ACTIVE'"   [color]="color" (change)="onChange_1(process)"></mat-slide-toggle>
+    
+        </td> 
+    </tr>
+                
+    
+            </tbody>
+        </table>
+       
+    </div>
+</div>
+</div>
+
+    
+
+
+    
+    
+    <ngx-spinner type="ball-atom"></ngx-spinner>

@@ -1,0 +1,71 @@
+body {
+    text-align: center;
+    padding: 150px;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+body {
+    font: 20px Helvetica, sans-serif;
+    color: #333;
+}
+
+article {
+    display: block;
+    text-align: left;
+    width: 650px;
+    margin: 0 auto;
+}
+
+a {
+    color: #dc8100;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.mat-row:nth-child(even) {
+    background-color: rgb(242, 233, 243);
+}
+
+.mat-row:nth-child(odd) {
+    background-color: rgba(235, 238, 240, 0.075);
+}
+
+
+.mat-column-rule_name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 28% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .mat-column-priority {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 22% !important;
+    width: 22% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  

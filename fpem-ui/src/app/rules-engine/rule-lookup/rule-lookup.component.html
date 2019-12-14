@@ -1,0 +1,276 @@
+<!-- <div class="row">
+    <div style="width: 84%;">
+        <mat-form-field style="margin-left: 2%">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+    </div>
+    <div style="width: 13%;margin-left: 3%">
+        <button style="margin-top: 10px;" class="btn btn-info" data-toggle="modal" data-target="#addLookup" data-backdrop="false" (click)="add()"><i
+                class="fa fa-plus"></i>Add Lookup</button>
+
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="example-container mat-elevation-z2">
+
+
+
+
+            <table style="width:100%" mat-table [dataSource]="dataSource" matSort>
+
+
+                <ng-container matColumnDef="lookupName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Lookup Name</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.lookup_name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="tableName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Reference File Name</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.reference_file_name_business}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Key">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Key</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.key_desc}} </td>
+                </ng-container>
+                <ng-container matColumnDef="value">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Value</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.value_desc}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="update">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Update</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#updateLookup" data-backdrop="false" (click)="updatepop(element,i)"><i class="fas fa-edit"></i></button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Delete</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                        <button class="btn btn-danger" (click)="delete(element,i)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </div>
+</div> -->
+
+<div class="table-container ">
+  
+        <div class="row">
+    
+    
+                <div class="col-4">
+                    <mat-form-field style="margin-left: 2%">
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <div class="col-4 text-center">
+                    <h6 style="   color: #ff9966">RULE LOOKUPS</h6>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-link" data-toggle="modal" data-target="#addLookup" (click)="add()" data-backdrop="false" style="float: right;margin-top: 1%"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add New</button>
+        
+                </div>
+            </div>
+    
+        <div class="example-container mat-elevation-z1">
+    
+                <table style="width:100%" mat-table [dataSource]="dataSource" matSort>
+
+
+                        <ng-container matColumnDef="lookupName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Lookup Name</b> </th>
+                            <td mat-cell flex-stretch *matCellDef="let element"> {{element.lookup_name}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="tableName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Reference File Name</b> </th>
+                            <td mat-cell flex-stretch *matCellDef="let element"> {{element.reference_file_name_business}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="Key">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Key</b> </th>
+                            <td mat-cell flex-stretch *matCellDef="let element"> {{element.key_desc}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="value">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Value</b> </th>
+                            <td mat-cell flex-stretch *matCellDef="let element"> {{element.value_desc}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="update">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Update</b> </th>
+                            <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#updateLookup" data-backdrop="false" (click)="updatepop(element,i)"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="delete">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Delete</b> </th>
+                            <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                                <button class="btn btn-danger" (click)="delete(element,i)"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </ng-container>
+        
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                        </tr>
+                    </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    
+        </div>
+    
+    </div>
+<div class="modal" id="addLookup">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Lookup</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                            <h4>Lookup Name:</h4>
+                        </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <input [(ngModel)]="this.lookup_name" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                            <h4>Reference Name:</h4>
+                        </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <select [(ngModel)]="this.selectedRefName" class="form-control" (change)="RefnameChange()">
+                            <option *ngFor="let refName of reference_name">{{refName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                            <h4>Key:</h4>
+                        </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <select [(ngModel)]="this.selectedKey" class="form-control" (change)="keyChange()">
+                                <option [value]="" selected></option>
+                            <option *ngFor="let keys of keyArr">{{keys}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                            <h4>Value:</h4>
+                        </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <select [(ngModel)]="this.selectedValue" class="form-control">
+                                    <option [value]="" selected></option>
+                                <option *ngFor="let Values of valueArr">{{Values}}
+                                </option>
+                            </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button style="margin-right: 10px" type="button" class="btn btn-info" (click)="addnewlayout()" data-dismiss="modal">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="updateLookup">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Lookup</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                                <h4>Lookup Name:</h4>
+                            </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <input [(ngModel)]="this.lookup_name" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                                <h4>Reference Name:</h4>
+                            </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <select [(ngModel)]="this.selectedRefName" class="form-control" (change)="RefnameChange()">
+                                
+                                <option *ngFor="let refName of reference_name">{{refName}}
+                                </option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                                <h4>Key:</h4>
+                            </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <select [(ngModel)]="this.selectedKey" class="form-control" (change)="keyChange()">
+                                    <option [value]="" selected></option>
+                                <option *ngFor="let keys of keyArr">{{keys}}
+                                </option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style=" width: 22%;margin-left: 18%; margin-top: 30px;">
+                        <label>
+                                <h4>Value:</h4>
+                            </label>
+                    </div>
+                    <div style=" width:35%; margin-top: 25px;">
+                        <select [(ngModel)]="this.selectedValue" class="form-control">
+                                        
+                                    <option *ngFor="let Values of valueArr">{{Values}}
+                                    </option>
+                                </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button style="margin-right: 10px" type="button" class="btn btn-info" (click)="updateLookup()" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

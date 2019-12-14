@@ -1,0 +1,255 @@
+<h6 style="color: #FF9966;text-align: center;margin-bottom: 2%">
+    REPORT EDITOR</h6>
+
+<mat-accordion>
+    <mat-expansion-panel style="overflow-y:auto">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Select Report Parameters
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+
+                    <label class="col-lg-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Organisation:</b></label>
+                    <div class="col-10">
+                        <ng-select [items]="financialService.org_unit_cds" bindLabel="organisation_name" bindValue="org_unit_cd" [multiple]="true" placeholder="Select Organisation" [(ngModel)]="report_params.org_unit_cd" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                            [closeOnSelect]="false" name="org">
+
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Currency:</b></label>
+                    <div class="col-5">
+
+                        <ng-select [items]="currency_type" bindLabel="name" bindValue="cd" [multiple]="false" placeholder="Select Currency Type" [(ngModel)]="report_params.curr_type_code" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false" name="curr">
+
+                        </ng-select>
+                    </div>
+                    <div class="col-5">
+                        <ng-select [items]="currency" bindLabel="code" bindValue="code" [multiple]="false" placeholder="Select Currency" [(ngModel)]="report_params.curr_code" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false" name="curr_code">
+
+                        </ng-select>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Book
+                            Code:</b></label>
+                    <div class="col-10">
+                        <ng-select [items]="book_code" bindLabel="book_code" bindValue="book_code" [multiple]="true" placeholder="Select Book Code" [(ngModel)]="report_params.book_cd" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false" name="book">
+                        </ng-select>
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <label class="col-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Account:</b></label>
+                    <div class="col-10">
+                        <ng-select [items]="financialService.coas" bindLabel="acct_num_desc" bindValue="acct_num" [multiple]="true" placeholder="Select Account" [(ngModel)]="report_params.acct_num" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false"
+                            name="account_description">
+
+                        </ng-select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <label class="col-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Accounting
+                            Date:</b></label>
+                    <div class="col-10">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="d2" #c2="ngModel" [(ngModel)]="report_params.acct_date" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+                        <!-- <input [(ngModel)]="report_params.acct_date" type="date" style="width: 100%; height: 35px;"> -->
+
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Processing 
+                            Date:</b></label>
+                    <div class="col-10">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="d21" #c2="ngModel" [(ngModel)]="report_params.proc_date" ngbDatepicker #d21="ngbDatepicker" (click)="d21.toggle()">
+                        <!-- <input [(ngModel)]="report_params.acct_date" type="date" style="width: 100%; height: 35px;"> -->
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+            <div class="col-6" style="margin-left: auto;">
+                <ng-select [items]="financialService.colNames" bindLabel="showName" bindValue="id" [multiple]="true" placeholder="Select Report Fields" [(ngModel)]="report_params.project_fields" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false"
+                    name="fieldSelect" (change)="changeOnProjectFields($event)">
+
+                </ng-select>
+                <br>
+                <div class="row">
+
+                    <label class="col-lg-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Other Filters:</b></label>
+                    <div class="col-10">
+                        <button type="button" style="margin-right:5% ;" id="plus" class="btn btn-success btn-circle" (click)="otherFilters()" data-toggle="tooltip" title="Add Filters."><i
+                            class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="row" *ngFor="let obj1 of otherfilter; let i= index">
+
+                    <br>
+                    <div style="width: 35%;margin-left: 2%">
+
+                        <!--  <select class="form-control" [(ngModel)]="this.otherfilter[i].field_name">
+                                                                                    <option *ngFor="let obj1 of this.project_fields; let k= index">
+                                                                                        {{obj1.showName}}
+                                                                                    </option>
+                                                                            </select> -->
+                        <ng-select [items]="project_fields" bindLabel="showName" bindValue="showName" [multiple]="false" placeholder="Select Fields" [(ngModel)]="this.otherfilter[i].field_name" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false"
+                            name="field_name">
+                        </ng-select>
+
+                    </div>
+
+                    <div style="width: 21%;margin-left: 2%">
+                        <!--  <select class="form-control" [(ngModel)]="this.otherfilter[i].oprater">
+                                                                                    <option *ngFor="let obj1 of this.Condition; let k= index">
+                                                                                            {{obj1}}
+                                                                                        </option>
+                                                                                </select> -->
+                        <ng-select [items]="Condition" [multiple]="false" placeholder="Select Oprater" [(ngModel)]="this.otherfilter[i].operator" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false" name="oprater">
+                        </ng-select>
+                    </div>
+
+                    <div style="width: 21%;margin-left: 2%">
+
+                        <div>
+                            <input class="form-control" [(ngModel)]="this.otherfilter[i].value">
+                        </div>
+
+                    </div>
+                    <div style="width: 5%;margin-left: 2%">
+                        <button type="button" class="btn btn-danger btn-circle" id="delete" (click)="cancelFilter(i)"><i class="fa fa-trash"></i>
+                                                                            </button>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class='col-6'>
+                <button class="btn btn-success" style="margin-left:45%;margin-top: 1%;margin-bottom: 1.5%" (click)="submit()">Submit</button>
+            </div>
+            <div class='col-6'>
+                <button class="btn btn-info" data-toggle="modal" data-target="#save-report" data-backdrop="false" style=" margin-left: 15%;margin-top: 1%;margin-bottom: 1.5%" (click)="save()">Save  </button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+
+</mat-accordion>
+<br>
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Select Rows Columns
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col-6">
+
+                <div class="row">
+
+                    <label class="col-lg-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Columns:</b></label>
+                    <div class="col-10">
+                        <ng-select [items]="col_fields" bindLabel="field_name" bindValue="field_name" [multiple]="true" placeholder="Select Columns Fields Name" [(ngModel)]="col" [closeOnSelect]="false" name="coll" (change)="change_col_row($event,'col')">
+
+                        </ng-select>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-6" style="margin-left: auto;">
+
+
+                <div class="row">
+
+                    <label class="col-lg-2 control-label" style="font-size: 15px ;margin-top: 1%;margin-bottom: 1.5%"><b>Rows:</b></label>
+                    <div class="col-10">
+                        <ng-select [items]="row_fields" bindLabel="field_name" bindValue="field_name" [multiple]="true" placeholder="Select Row Fields Name" [(ngModel)]="row" [closeOnSelect]="false" name="roww" (change)="change_col_row($event,'row')">
+
+                        </ng-select>
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <button class="btn btn-success" style=" margin-left: 50%;margin-top: 1%;margin-bottom: 1.5%" (click)="submitrowcol()">Submit</button>
+
+
+
+        </div>
+    </mat-expansion-panel>
+
+
+</mat-accordion>
+<br>
+<div id="output" class="content"></div>
+<div style="margin-left: 45%;" class="row">
+    <button style='margin-bottom: 5%;' class="btn btn-info" (click)="myFunction()">Print</button>
+</div>
+
+<div class="modal" id="save-report">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Report Name</h4>
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Report Name:</b></label>
+                    <div class="col-lg-8">
+                        <input type="text" [(ngModel)]="report_name" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="SaveReport()">Save Report</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

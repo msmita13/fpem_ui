@@ -1,0 +1,48 @@
+<h6>
+
+    ACCOUNTING PERIOD</h6>
+<div class="row">
+    <div class="col-4 text-right">
+        <p>Currenct Platform Processing Date :</p>
+    </div>
+    <div class="col-6 row">
+        <div class="col-3">
+            <h5>{{ppd}}</h5>
+        </div>
+        <div class="col-3"> <button class="btn btn-outline-info" (click)="advance()">Advance</button></div>
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-4 text-right">
+        <p>Roll Back :</p>
+    </div>
+    <div class="col-3">
+        <ng-select [items]="ppds" bindLabel="date" bindValue="date" [multiple]="false" placeholder="Select PPd" [(ngModel)]="selectedPpd" name="ppd" (close)="changeppd(selectedPpd)" [closeOnSelect]="false">
+        </ng-select>
+    </div>
+
+    <div class="col-3">
+        <ng-select [items]="runids" [multiple]="false" placeholder="Select Run Id" [(ngModel)]="selectedRunId" name="runid" [closeOnSelect]="false">
+        </ng-select>
+    </div>
+    <div class="col-2">
+        <button class="btn btn-outline-info" (click)="rollBack()">Roll Back</button>
+    </div>
+</div>
+
+<br>
+<div class="row">
+    <div class="col-4 text-right">
+        <p>Accounting Period :</p>
+    </div>
+    <div class="col-7 text-left">
+        <p><b>{{startMonth}}-{{endMonth}}</b></p>
+    </div>
+</div>
+
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

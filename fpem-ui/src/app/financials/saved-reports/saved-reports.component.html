@@ -1,0 +1,64 @@
+
+
+
+
+
+
+<div class=" table-container ">
+
+    <div class="row">
+        <div class="col-4">
+                    <mat-form-field style="margin-left: 2%">
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <div class="col-4 text-center">
+                    <h6 >SAVED REPORT</h6>
+                </div>
+               
+            </div>
+<div class="example-container  mat-elevation-z1">
+  
+    <table style="width: 100%" mat-table [dataSource]="dataSource" matSort #sort="matSort">
+
+
+        <ng-container matColumnDef="report_name" sticky>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Report Name </b>
+            </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.report_name}} </td>
+        </ng-container>
+
+
+
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>
+                <b>Delete</b></th>
+            <td mat-cell flex-stretch *matCellDef="let element; let i= index">
+                <button class="btn btn-danger" (click)="delete(i,element)">Delete</button>
+
+
+            </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="check_report" sticky-end>
+            <th mat-header-cell *matHeaderCellDef>
+                <b>Check Report</b></th>
+            <td mat-cell flex-stretch *matCellDef="let element; let i= index">
+
+                <button class="btn btn-success" (click)="Open(i,element)">See Report</button>
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
+</div>

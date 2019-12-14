@@ -1,0 +1,198 @@
+<div style="height: 12%;">
+</div>
+
+<div style="height: 88%;background-color: white;">
+
+    <div class="row">
+
+
+        <div class="col-4">
+            <mat-form-field style="margin-left: 2%">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+        <div class="col-4 text-center">
+            <h6 >PLATEFORM BUSINESS TERMS</h6>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-link" data-toggle="modal" data-target="#addNewField" data-backdrop="false" style="float: right;margin-top: 1%"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add New Business Term</button>
+
+        </div>
+    </div>
+
+
+    <div class=" example-container mat-elevation-z1">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="update">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit </th>
+
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                    <button data-toggle="modal" data-target="#updateField" data-backdrop="false" class="btn btn-warning" (click)="updateField(element,i)"><i class="fa fa-edit"
+                                    aria-hidden="true"></i></button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="business_field_name">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> Business Term </th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                    {{ element.business_field_name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="field_datatype">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header>Term Datatype</th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                    {{ element.field_datatype }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="logical_field_name">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header>Platform Logical Association </th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                    {{ element.logical_field_name }} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="is_nullable">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> Is Nullable</th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                    <p *ngIf="element.is_nullable==0">No</p>
+                    <p *ngIf="element.is_nullable==1">Yes</p>
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                    <button class="btn btn-danger" (click)="deleteField(element,i)"><i class="fa fa-trash"
+                            aria-hidden="true"></i></button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+</div>
+
+<div class="modal" id="addNewField">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Add Business Term</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Business Term:</b></label>
+                    <div class="col-lg-8">
+                        <input type="text" [(ngModel)]="business_field_name" class="form-control" />
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Term Datatype</b></label>
+                    <div class="col-lg-8">
+
+
+                        <select [(ngModel)]="datatype" class="form-control">
+                                <option *ngFor="let x of allDatatype">{{x}}</option>
+                            </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Is Nullable</b></label>
+                    <div class="col-lg-8">
+
+
+                        <select [(ngModel)]="is_nullable" class="form-control">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="saveNewField()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="updateField">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Update Business Term</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Business Term:</b></label>
+                    <div class="col-lg-8">
+                        <input type="text" [(ngModel)]="business_field_name" class="form-control" />
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Term Datatype</b></label>
+                    <div class="col-lg-8">
+
+
+                        <select [(ngModel)]="datatype" class="form-control">
+                                    <option *ngFor="let x of allDatatype">{{x}}</option>
+                                </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Is Nullable</b></label>
+                    <div class="col-lg-8">
+
+
+                        <select [(ngModel)]="is_nullable" class="form-control">
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="UpdateField()">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

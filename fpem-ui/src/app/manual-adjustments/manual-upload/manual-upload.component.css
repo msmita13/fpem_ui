@@ -1,0 +1,114 @@
+
+
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: rgb(7, 77, 168);
+  }
+  
+  ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: rgb(95, 187, 248) !important;
+  }
+  
+  .mat-cell .flex-stretch {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    /* align-items center so that cell content is vertically centered */
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    font-size: 14px;
+    min-height: 48px;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    align-items: center;
+  }
+  
+  .right.mat-header-cell {
+    text-align: right;
+  }
+  
+  .right.mat-cell {
+    text-align: right;
+  }
+  
+  
+  .modal-footer button{
+    width: 134.42px;
+    height: 43px;
+   font-size: 14px;
+   
+  }
+  
+  
+    
+  .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  
+  
+  
+  .example-container {
+    max-height: 720px;
+    overflow: auto;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  th {
+    font-size: 16px;
+    color: white;
+  }
+  
+  .mat-cell {
+    padding: 5px 10px 5px 0;
+  }
+  
+  .mat-header-cell {
+    padding: 5px 10px 5px 0;
+  }
+  
+  .mat-row:nth-child(even) {
+    background-color: rgb(238, 224, 226);
+  }
+  
+  .mat-row:nth-child(odd) {
+    background-color: white;
+  }
+  
+  #header {
+    background-color: rgb(58, 183, 255);
+  }
+  
+  #btn {
+    background-color: rgb(127, 221, 245);
+  }
+  
+  
+  tr {
+    background-color: rgb(58, 183, 255);
+  }
+  
+  th {
+    height: 2px;
+  }
+  
+  ::ng-deep .mat-sort-header-arrow {
+    color: white !important
+  }
+  
+  

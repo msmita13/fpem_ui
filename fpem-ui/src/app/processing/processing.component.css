@@ -1,0 +1,37 @@
+:host /deep/  .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color:#579b29
+}
+:host /deep/  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #579b29
+}
+
+
+.table-striped tbody tr:nth-of-type(odd){
+  
+    background-color:white;
+}
+
+.table-striped tbody tr:nth-of-type(even){
+    background-color: rgb(238, 224, 226);
+}
+
+.page-content{
+        
+    background-position: center center;
+    background-size: cover;
+    min-height: 95vh !important;
+    /* max-height: 999px; */
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+   
+}
+.table-container{
+   margin-top: 10%;
+  margin-left: 3%;margin-right: 3%}
+  h6{
+      color: #ff9966;
+      margin-bottom: 2%;
+      margin-left: 42%
+  }

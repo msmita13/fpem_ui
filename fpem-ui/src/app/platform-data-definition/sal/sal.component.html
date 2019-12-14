@@ -1,0 +1,80 @@
+<div style="height: 88%;background-color: white">
+
+    <div class="row" style="  margin-right: 2%;">
+
+        <div class="col-7 text-right" style="margin-top: 1%">
+            <h6>ARRANGEMENT LAYOUT</h6>
+        </div>
+        <div class="col">
+            <button class="btn btn-link" (click)="addNewSal()" data-toggle="tooltip" title="Add Sal Fields." style="float: right"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add New</button>
+        </div>
+    </div>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="dropSal($event)">
+
+        <div class="row" id="heading">
+            <div style="width: 4%;"><b>S.No.</b></div>
+            <div style="width: 37%;margin-left: 2%; margin-right: 1%;"><b>Business Field Name</b>
+            </div>
+            <div style="width: 37%;margin-left: 2%"><b>Is Part Of Natural Key</b></div>
+            <div style="width: 5%;margin-left: 2%"></div>
+            <div style="width: 5%;margin-left: 2%"></div>
+
+
+        </div>
+        <hr>
+        <div class="example-box" class="row" *ngFor="let obj1 of Sal_temp; let i= index" cdkDrag>
+
+
+            <br>
+            <br>
+            <div style="width: 4%;">
+                <b>{{i}} .</b>
+            </div>
+            <div style="width: 37%;margin-left: 2%; margin-right: 1%;">
+
+
+                <ng-select [items]="allFields" bindLabel="business_field_name" bindValue="business_field_name" [multiple]="false" placeholder="Select Fields" [(ngModel)]="this.Sal_temp[i].business_field_name" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                    [closeOnSelect]="false" (open)="onopen(this.Sal_temp[i],i)" (close)="onclose(this.Sal_temp[i],i)" name="field_name">
+                </ng-select>
+
+            </div>
+
+            <div style="width: 37%;margin-left: 2%">
+
+                <select [(ngModel)]="this.Sal_temp[i].is_natural_key" class="form-control">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+
+                </select>
+
+
+            </div>
+
+
+
+
+            <div style="width: 5%;margin-left: 2%">
+                <button type="button" class="btn btn-danger btn-circle" id="delete" (click)="deleteSal(this.Sal_temp[i],i)"><i class="fa fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="example-handle" style="width: 5%;margin-left: 2%" cdkDragHandle>
+                <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+                    </path>
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                </svg>
+            </div>
+            <br>
+            <br>
+
+
+        </div>
+
+    </div>
+    <br>
+    <div class="row" style="margin-left: 45%;">
+        <button (click)="SaveSal()" class="btn " id="savebtn" style="width: 108px">Save</button>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container-fluid">
+
+        <div ><h6>PERIOD END</h6></div>
+    <div class=" row" style="margin-left: auto;margin-right: auto">
+       <div class="col-3" style="padding-left: 12%;margin-left: 20%" ><label ><h5><b>Select Period Start:</b></h5></label></div>
+       <div class="col-3">
+        <select  class="form-control"   [(ngModel)]="select" name="select"  (change)="selectoption($event)">
+            <option [ngValue]="undefined" disabled>Choose</option>
+           <option *ngFor="let select of allSelect" [ngValue]="select">
+            {{ select}}
+           </option>
+         </select> </div></div>
+         <div class=" row" *ngIf="is_show" style="margin-left: auto;margin-right: auto;margin-top: 2%">
+       <div class="col-3" style="width: 138px !important;padding-left: 12%;margin-left: 20%" ><label><h5><b>Select Start PPD:</b></h5></label></div>
+       <div class="col-3">
+                <select  class="form-control"   [(ngModel)]="ppd" name="ppd"  (change)="selectppd($event)">
+                        <option [ngValue]="undefined" disabled>Choose</option>
+                       <option *ngFor="let ppd of Start_ppd" [ngValue]="ppd">
+                        {{ ppd.ppd}}
+                       </option> 
+                     </select>
+                     </div>
+         </div>
+    
+                                    <div class="row" style="background-color:rgb(58, 183, 255);padding-top: 0.5%;padding-bottom: .5%;margin-top: 2%;padding-left: 5%">
+                                       <div class="col-3"> <h5>Account Description</h5></div>
+                                       <div class="col-2">  <h5>Account Type</h5></div>
+                                       <div class="col-1"> <h5><i class="fa fa-arrow-right"></i></h5></div>
+                                        <div class="col-3">  <h5>Account Description</h5></div>
+                                            <div class="col-2"><h5>Account Type</h5></div>
+                                        
+                                    </div>
+                                    <div class="row" *ngFor="let A_type of A" style="margin-top: 1%">
+                                            <div class="col-3" >
+                                                    <select  class="form-control"   [(ngModel)]="account_desc" name="account_desc"  (change)="select_account_desc($event)">
+                                                           <option selected disabled [ngValue]="account_desc">
+                                                            {{ A_type.acct_num_desc}}
+                                                           </option> 
+                                                           <option *ngFor="let des of Account_des_select" [ngValue]="select" >
+                                                                {{des}}
+                                                               </option> 
+                                                         </select>
+                                            </div>
+                                            <div class="col-2">
+                                                   <h5 style="padding-left:35%">  {{ A_type.acct_type_cd}}</h5>
+                                                           
+                                                            
+                                            </div>
+                                       <div class="col-1"> <h5 style="padding-left: 42%"><i class="fa fa-arrow-right"></i></h5></div>
+                                       <div class="col-3" >
+                                                    <select  class="form-control"   [(ngModel)]="account_desc" name="account_desc"  (change)="select_account_desc($event)">
+                                                            <option selected disabled [ngValue]="account_desc" >
+                                                             {{ A_type.acct_num_desc}}
+                                                            </option> 
+                                                            <option *ngFor="let des of Account_des_select" [ngValue]="select" >
+                                                                 {{des}}
+                                                                </option> 
+                                                          </select>
+                                                
+                                    </div>
+                                    <div class="col-2">
+                                            <h5 style="padding-left:35%">  {{ A_type.acct_type_cd}}</h5>
+
+                                    </div>
+                                    </div>
+                                    
+</div>

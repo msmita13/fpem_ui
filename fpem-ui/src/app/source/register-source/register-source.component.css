@@ -1,0 +1,130 @@
+:host /deep/ a.ng2-smart-page-link.page-link {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: royalblue;
+    font-weight: bold;
+    line-height: 6px;
+}
+
+ :host /deep/ span.ng2-smart-page-link.page-link {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-weight: bold;
+    line-height: 6px;
+}
+
+ :host /deep/ span.ng2-smart-page-item.page-item.disabled {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: grey;
+    font-weight: bold;
+    line-height: 6px;
+}
+
+ :host /deep/ a.ng2-smart-page-link.page-link.page-link-prev {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: royalblue;
+    font-weight: bold;
+    line-height: 6px;
+}
+
+ :host /deep/ span.ng2-smart-page-link.page-link.page-link-prev.disabled {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: grey;
+    font-weight: bold;
+    line-height: 6px;
+}
+
+ :host /deep/ a.ng2-smart-page-link.page-link.page-link-next {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: royalblue;
+    font-weight: bold;
+    line-height: 6px;
+}
+
+ :host /deep/ span.ng2-smart-page-link.page-link.page-link-next.disabled {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    color: grey;
+    font-weight: bold;
+    line-height: 6px;
+}
+
+ :host /deep/ .ng2-smart-pagination-nav {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+
+/* .table-container { height: 600px; overflow-y: auto; border-top: 1px solid #dee2e6; } */
+
+
+/* :host /deep/ ng2-smart-table table > tbody > .ng2-smart-row.selected {
+                background-color: rgb(191, 230, 243)!important
+            } */
+
+button {
+    font-size: 14px;
+}
+
+ :host /deep/ ng2-smart-table table>tbody>tr:nth-of-type(even) {
+    background-color: rgb(238, 224, 226);
+}
+
+:host /deep/ ng2-smart-table table>tbody>tr:nth-of-type(odd) {
+    background-color: white;
+}
+
+h4 {
+    margin-left: 5%
+}
+
+:host /deep/ ng2-smart-table table>thead> {
+    color: white !important
+}
+
+:host /deep/ ng2-smart-table thead>.ng2-smart-titles>th {
+    background-color: rgb(58, 183, 255);
+    height: 46px !important
+}
+
+:host /deep/ ng2-smart-table-title>a {
+    color: white
+}
+
+:host /deep/ ng2-smart-table table>thead>tr>th>.ng2-smart-title {
+    color: white !important;
+    text-transform: uppercase;
+}
+
+:host /deep/ ng2-smart-table thead>.ng2-smart-filters>.ng2-smart-actions-title-add>a>.btn {
+    color: #007bff !important;
+    width: 90px
+}
+
+h6 {
+    color: #ff9966;
+    text-align: center;
+}

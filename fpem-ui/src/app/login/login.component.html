@@ -1,0 +1,85 @@
+<div class="wrapper">
+    <div class="page-header" style="background-image: url('./assets/img/login-image.jpg');">
+        <div class="filter"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+                    <div class="card card-register" style="background-color: rgb(25, 201, 255);">
+                        <h3 class="title">Welcome</h3>
+                        <p *ngIf="error!=undefined" style="text-align-last: center;color: red;">{{error}}</p>
+
+                        <form class="register-form" #fl="ngForm">
+                            <label>Email</label>
+                            <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                    <i class="fa fa-envelope"></i>
+                                  </span>
+                                </div>
+
+                                <input type="text" class="form-control" name="email" [(ngModel)]="email" #eml="ngModel" [ngClass]="{ 'is-invalid': fl.submitted && eml.invalid }" email="true" placeholder="Enter your email" required />
+                            </div>
+
+                            <label>Password</label>
+                            <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                    <i class="fa fa-key"></i>
+                                  </span>
+                                </div>
+                                <input type="password" class="form-control" name="password" [(ngModel)]="password" #passl="ngModel" placeholder="Enter password" [ngClass]="{ 'is-invalid': fl.submitted && passl.invalid }" required minlength="6" />
+                            </div>
+
+
+                            <button class="btn btn-danger btn-block btn-round" (ngSubmit)="fl.form.valid" (click)="Login(fl)">LOGIN</button>
+                        </form>
+                        <div class="forgot">
+                            <a data-toggle="modal" data-target="#forgotpass" data-backdrop="false" class="btn btn-link btn-danger" style="text-decoration: none">Forgot password?</a>
+                        </div>
+
+                        <div class="forgot">
+                            <a routerLink="/signup" class="btn btn-link btn-danger" style="text-decoration: none">DON'T HAVE ACCOUNT?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<div class="modal" id="forgotpass">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">We are here to help you..</h4>
+            </div>
+
+
+            <div class="modal-body" style="padding-left: 5%">
+                <div class="row">
+                    <label class="col-lg-2 control-label" style="font-size: 15px ;"><b>Email:</b></label>
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Email" [(ngModel)]="forgotEmail">
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="sendPass()">Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+#option11 {
+    margin-top: 1px;
+    border: black;
+}
+
+#ii {
+    width: 20%;
+    margin-left: 20%;
+    margin-top: 30px;
+}
+
+#event {
+    width: 35%;
+    margin-top: 25px;
+}
+
+
+.marginRow {
+    margin: 0px !important;
+    margin-bottom: 2px
+}
+
+#thenfield {
+    margin-top: 15px
+}
+
+#thenfields {
+    margin-top: 15px;
+    /* margin-left: 80px */
+}
+
+#arrow {
+    margin-left: 15px
+}
+
+/* button{
+    width: 134.42px;
+    height: 43px;
+   font-size: 14px;
+   
+} */
+
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+
+
+.example-container {
+    max-height: 720px;
+    overflow: auto;
+   
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    font-size: 16px;
+    color: white;
+}
+
+.mat-cell {
+    padding: 5px 10px 5px 0;
+}
+
+.mat-header-cell {
+    padding: 5px 10px 5px 0;
+}
+
+.mat-row:nth-child(even) {
+    background-color: rgb(238, 224, 226);
+}
+
+.mat-row:nth-child(odd) {
+    background-color: white;
+}
+
+#header {
+    background-color: rgb(58, 183, 255);
+}
+
+#btn {
+    background-color: rgb(127, 221, 245);
+}
+
+
+tr {
+    background-color: rgb(58, 183, 255);
+}
+
+th {
+    height: 2px;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    color: white !important
+}
+

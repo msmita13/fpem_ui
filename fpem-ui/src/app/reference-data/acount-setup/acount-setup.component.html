@@ -1,0 +1,410 @@
+<div class=" table-container ">
+
+
+
+    <div class="row">
+
+
+            <div class="col-4">
+                <mat-form-field style="margin-left: 2%">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div class="col-4 text-center">
+                <h6 style="   color: #ff9966">CHART OF ACCOUNT</h6>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-link" data-toggle="modal" data-target="#add" data-backdrop="false" style="float: right;margin-top: 1%" (click)=add()><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add New</button>
+    
+            </div>
+        </div>
+    
+    <div class="example-container mat-elevation-z1">
+        <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+
+            <ng-container matColumnDef="account_number">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Account Number</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                    {{ element.acct_num}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="account_description">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Account Description</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                    {{ element.acct_num_desc }} </td>
+            </ng-container>
+            <ng-container matColumnDef="account_type">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Account Type</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right">
+
+                    {{ account_obj[element.acct_type_cd] }} </td>
+
+            </ng-container>
+
+            <ng-container matColumnDef="balance_sheet">
+                <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>onBalance Sheet/offBalance Sheet</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element" class="right" style="padding-left:5%">
+                    {{ yesNoObj[element.on_off_indicator]}} </td>
+
+            </ng-container>
+            <ng-container matColumnDef="other_detail">
+                <th mat-header-cell *matHeaderCellDef><b>Other Detail</b> </th>
+
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+
+                    <button class="btn btn-primary" type="button" id="btn1" data-toggle="modal" data-target="#otherDetail" data-backdrop="false" (click)="other_Detail(element,i)">Details</button>
+
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef><b>Edit</b> </th>
+
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+
+                    <button class="btn btn-warning" type="button" id="btn1" data-toggle="modal" data-target="#editDetail" data-backdrop="false" (click)="edit(element,i)"><i class="fa fa-edit"
+                        aria-hidden="true"></i></button>
+
+                </td>
+            </ng-container>
+
+
+
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef><b>Delete</b> </th>
+
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                    <button class="btn btn-danger" (click)="deleteRefacc(element,i)"><i class="fa fa-trash"
+                        aria-hidden="true"></i></button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
+
+
+<div class="modal" id="otherDetail">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Other Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-left: 15%">
+
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Number :</b></label>
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" readonly [(ngModel)]="obj.acct_num" name="accountnumber">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Name :</b></label>
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" readonly [(ngModel)]="obj.acct_num_desc" name="test">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Onbalance Sheet Account (If Intra Unit Elimination) :</b></label>
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" readonly [(ngModel)]="obj.on_balancesheet_account" name="onbalance">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Off Balance Sheet Account (If Intra Unit Elimination):</b></label>
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" readonly [(ngModel)]="obj.off_balancesheet_account" name="offbalance">
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let book of book_cds;let i=index">
+                        <div class="col-4">
+                            <label><b>{{book}} Reclass Account:</b></label>
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" readonly value="{{ reclass_accounts[i]}}" name="UKGP_Reclass">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="editDetail">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-left: 15%">
+
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Number :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" [(ngModel)]="obj.acct_num" name="accountnumber">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Description :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="accountdescription" [(ngModel)]="obj.acct_num_desc" placeholder="Enter Account Description">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Type :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <select class="form-control" name="accounttype" [(ngModel)]="obj.acct_type_cd" placeholder="Enter Account Type">
+                              <option value="A">Asset</option>
+                              <option value="L">Liability</option>
+                              <option value="I">Income</option>
+                              <option value="E">Expense</option>
+                              <option value="Q">Equity</option>
+                              <option value="O">Other</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> OnBalance Sheet/OffBalance Sheet:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <select class="form-control" [(ngModel)]="obj.on_off_indicator" name="sheet" (change)="selectoption($event)">
+                                                        <option [ngValue]="undefined" disabled>Choose</option>
+                                                        <option value="1">
+                                                        YES
+                                                        </option>
+                                                        <option value="0">
+                                                            NO
+                                                            </option>
+                                                      </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> On balance Sheet Account(In case of Intra Unit Elimination):</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" [(ngModel)]="obj.on_balancesheet_account" name="onbalance">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Off balance Sheet Account (In case of Intra Unit Elimination):</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" [(ngModel)]="obj.off_balancesheet_account" name="offbalance">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> UKGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="UKGP_Reclass" [(ngModel)]="book_xref_reclass_account.UKGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> USGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="USGP_Reclass" [(ngModel)]="book_xref_reclass_account.USGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> INGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="INGP_Reclass" [(ngModel)]="book_xref_reclass_account.INGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> CAGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="CAGP_Reclass" [(ngModel)]="book_xref_reclass_account.CAGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> HKGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="HKGP_Reclass" [(ngModel)]="book_xref_reclass_account.HKGP" placeholder="Optional">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="update()">Save</button>
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="add">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Account</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-left: 15%">
+
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Number :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" [(ngModel)]="obj.acct_num" name="accountnumber">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Description :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="accountdescription" [(ngModel)]="obj.acct_num_desc" placeholder="Enter Account Description">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Account Type :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <select class="form-control" name="accounttype" [(ngModel)]="obj.acct_type_cd" placeholder="Enter Account Type">
+                              <option value="A">Asset</option>
+                              <option value="L">Liability</option>
+                              <option value="I">Income</option>
+                              <option value="E">Expense</option>
+                              <option value="Q">Equity</option>
+                              <option value="O">Other</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> OnBalance Sheet/OffBalance Sheet:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <select class="form-control" [(ngModel)]="obj.on_off_indicator" name="sheet" (change)="selectoption($event)">
+                                                        <option [ngValue]="undefined" disabled>Choose</option>
+                                                        <option value="1">
+                                                        YES
+                                                        </option>
+                                                        <option value="0">
+                                                            NO
+                                                            </option>
+                                                      </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> On balance Sheet Account(In case of Intra Unit Elimination):</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" [(ngModel)]="obj.on_balancesheet_account" name="onbalance">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Off balance Sheet Account (In case of Intra Unit Elimination):</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" [(ngModel)]="obj.off_balancesheet_account" name="offbalance">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> UKGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="UKGP_Reclass" [(ngModel)]="book_xref_reclass_account.UKGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> USGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="USGP_Reclass" [(ngModel)]="book_xref_reclass_account.USGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> INGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="INGP_Reclass" [(ngModel)]="book_xref_reclass_account.INGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> CAGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="CAGP_Reclass" [(ngModel)]="book_xref_reclass_account.CAGP" placeholder="Optional">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> HKGP Reclass:</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="HKGP_Reclass" [(ngModel)]="book_xref_reclass_account.HKGP" placeholder="Optional">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="addNewRow()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

@@ -1,0 +1,16 @@
+<div class=" table-container ">
+    <h6>SOURCE FIELDS</h6>
+
+    <div class=" mat-elevation-z1" style="max-height: 80vh;margin-left: 2%;margin-right: 2%">
+<table class="table responsive-table  ">
+    <ng2-smart-table [settings]="settings" [source]="data " (deleteConfirm)="onDeleteConfirm($event)"  (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)">
+    </ng2-smart-table>
+</table>
+</div>
+
+</div> 
+
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

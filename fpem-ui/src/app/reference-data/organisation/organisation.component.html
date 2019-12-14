@@ -1,0 +1,237 @@
+<div class=" table-container ">
+ <div class="row">
+<div class="col-4">
+                <mat-form-field style="margin-left: 2%">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div class="col-4 text-center">
+                <h6 style="   color: #ff9966">ORGANISATION</h6>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-link" data-toggle="modal" data-target="#add" data-backdrop="false" style="float: right;margin-top: 1%" ><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add New</button>
+    
+            </div>
+        </div>
+<div class="example-container mat-elevation-z1">
+    <table mat-table [dataSource]="dataSource" matSort >
+
+        <ng-container matColumnDef="org_unit_cd">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Organisation Code</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.org_unit_cd}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="organisation_name">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Organisation Name</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.organisation_name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="base_currency">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Base Currency</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.base_currency }} </td>
+
+        </ng-container>
+        <ng-container matColumnDef="presentation_currency">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Presentation Currency</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.presentation_currency }} </td>
+
+        </ng-container>
+        <ng-container matColumnDef="eligible_gaap">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Eligible Gaaps</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.eligible_gaap }} </td>
+
+        </ng-container>
+        <ng-container matColumnDef="iue_cost_center">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>IUE Cost Center</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.iue_cost_center }} </td>
+
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef><b>Edit</b> </th>
+
+            <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+
+                <button class="btn btn-warning" type="button" id="btn1" data-toggle="modal" data-target="#editDetail" data-backdrop="false" (click)="openUpdateOrg(element,i)"><i class="fa fa-edit"
+                        aria-hidden="true"></i></button>
+
+            </td>
+        </ng-container>
+
+
+
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef><b>Delete</b> </th>
+
+            <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                <button class="btn btn-danger" (click)="deleteOrg(element,i)"><i class="fa fa-trash"
+                        aria-hidden="true"></i></button>
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+</div>
+
+
+
+
+<div class="modal" id="editDetail">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Organisation</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-left: 15%">
+
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Organisation Code :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r8" [(ngModel)]="obj.org_unit_cd" placeholder="Organisation Code">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Organisation Name :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r6" [(ngModel)]="obj.organisation_name" placeholder="Organisation Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Base Currency :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r3" [(ngModel)]="obj.base_currency" placeholder="Base Currency">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Presentation Currency :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r2" [(ngModel)]="obj.presentation_currency" placeholder="Presentation Currency">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Gaaps :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r1" [(ngModel)]="obj.eligible_gaap" placeholder="Eligible Gaaps">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> IUE Cost Center :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r4" [(ngModel)]="obj.iue_cost_center" placeholder="IUE Cost Center">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="updateRow()">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="add">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Organisation</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-left: 15%">
+
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Organisation Code :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r8" [(ngModel)]="obj.org_unit_cd" placeholder="Organisation Code">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Organisation Name :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r6" [(ngModel)]="obj.organisation_name" placeholder="Organisation Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Base Currency :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r3" [(ngModel)]="obj.base_currency" placeholder="Base Currency">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Presentation Currency :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r2" [(ngModel)]="obj.presentation_currency" placeholder="Presentation Currency">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Gaaps :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r1" [(ngModel)]="obj.eligible_gaap" placeholder="Eligible Gaaps">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> IUE Cost Center :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="r4" [(ngModel)]="obj.iue_cost_center" placeholder="IUE Cost Center">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="addRow()">ADD</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

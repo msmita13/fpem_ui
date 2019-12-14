@@ -1,0 +1,194 @@
+<nav class="navbar navbar-expand-lg  navbar-dark fixed-top">
+    <!-- <a routerLink="/home"> <i class="fa fa-home" aria-hidden="true" style="color: white; font-size: 30px"></i></a> -->
+    <!-- <button type="button" class="btn btn-demo" > -->
+    <i class="fas fa-bars" id="test" style="color: white;font-size: 30px" data-toggle="modal" data-target="#sideModal"></i>
+    <!-- </button> -->
+    <a class="navbar-brand" routerLink="/home" style="color:aliceblue;cursor: pointer;padding-left: 2%;font-weight: bold">FPEM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+  <span class="navbar-toggler-icon"></span>
+</button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <div style="width: 60%;"> </div>
+
+        <div class="input-group" style=" width: 25%">
+            <input type="text" class="form-control" placeholder="Search" name="search" [(ngModel)]="searchText" autocomplete="off" data-toggle="dropdown">
+            <div class="dropdown-menu">
+                <a class="dropdown-item" *ngFor="let opt of options| filter:searchText" [routerLink]="[opt.route]" routerLinkActive="router-link-active">{{opt.name}}</a>
+            </div>
+            <div class="input-group-append">
+                <button class="btn " type="button" id="btn">
+          <i class="fa fa-search"></i>
+        </button>
+
+            </div>
+
+        </div>
+
+        <div>
+            <a routerLink="/help" style="color: white; font-size: 20px; font-family: Roboto Slab,Times New Roman,serif">
+                <i class="fa fa-question-circle" aria-hidden="true">Help</i>
+            </a>
+        </div>
+
+        <form class="form-inline ml-auto">
+            <div class="form-group has-white">
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+
+                        <img [src]="mainService.profileImageUrl" class="rounded-circle dropdown-toggle" data-toggle="dropdown" style="margin-top: 10%;padding-left: 6% ;height: 45px; width: 50px">
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a [routerLink]="['/profile']" routerLinkActive="router-link-active" class="dropdown-item">Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a [routerLink]="['/account']" routerLinkActive="router-link-active" class="dropdown-item">Account</a>
+                            <div class="dropdown-divider"></div>
+
+                            <a [routerLink]="['/login']" routerLinkActive="router-link-active" class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</nav>
+
+
+
+<div class="modal left fade" id="sideModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <H4>Menu</H4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="nav flex-sm-column flex-row" style="margin-top: 10%">
+                    <li class="dropdown" style="height: 42px;">
+                        <a routerLink="/home" style="color: black;text-decoration: none" data-dismiss="modal"> <i class="fa fa-home" aria-hidden="true" style=" font-size: 30px;color: rgb(30, 126, 236);margin-left: 3%"></i>&nbsp;HOME</a>
+                    </li>
+                    <li class="dropdown" style="height: 42px;">
+                        <a class=" dropdown-toggle" id="usermgmt_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/User.png" class="rounded-circle" style="  height: 40px; width: 50px">User Management
+                        </a>
+                        <i class="fas fa-angle-right" style="margin-left: 29%"></i>
+                        <div class="dropdown-menu " aria-labelledby="usermgmt_dropdown">
+                            <a class="dropdown-item" [routerLink]="['/usermgmt/users']" data-dismiss="modal">Users</a>
+                            <a class="dropdown-item" [routerLink]="['/usermgmt/roles']" data-dismiss="modal">User's Roles</a>
+                            <a class="dropdown-item" [routerLink]="['/usermgmt/createrole']" data-dismiss="modal">Create Roles</a>
+
+                        </div>
+                    </li>
+
+                    <li class="dropdown" style="height: 42px">
+                        <a class=" dropdown-toggle" id="financial_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/ff.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Financial
+                        </a>
+                        <i class="fas fa-angle-right" style="margin-left: 52%"></i>
+
+                        <div class="dropdown-menu " aria-labelledby="financial_dropdown">
+                            <a class="dropdown-item" [routerLink]="['/financials/commonreports']" data-dismiss="modal">Report Editor</a>
+                            <a class="dropdown-item" [routerLink]="['/financials/savedreports']" data-dismiss="modal">Saved Reports</a>
+
+                        </div>
+                    </li>
+                    <li class="dropdown" style=" height: 42px;">
+                        <a routerLink="/processing" style="color: black;text-decoration: none" data-dismiss="modal"> <img src="./assets/img/processing.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Business Processes</a>
+                    </li>
+                    <li class="dropdown" style=" height: 42px;">
+                        <a class=" dropdown-toggle" id="control_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/controls.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Control
+                        </a>
+                        <i class="fas fa-angle-right" style="margin-left: 57%"></i>
+                        <div class="dropdown-menu " aria-labelledby="control_dropdown">
+                            <a class="dropdown-item" [routerLink]="['/controls/activity-dashboard']" data-dismiss="modal">Activity Dashboard</a>
+                            <a class="dropdown-item" [routerLink]="['/controls/accounting-period']" data-dismiss="modal">Accounting Period</a>
+                            <a class="dropdown-item" [routerLink]="['/controls/periodend']" data-dismiss="modal">Period Close</a>
+
+                        </div>
+                    </li>
+
+
+                    <li class="dropdown" style="height: 42px;">
+                        <a class=" dropdown-toggle" id="reference_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/refernce.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Reference Data</a>
+                        <i class="fas fa-angle-right" style="margin-left: 37.2%"></i>
+
+                        <div class="dropdown-menu" aria-labelledby="reference_dropdown">
+                            <a class="dropdown-item" [routerLink]="['/referencedata/define']" data-dismiss="modal">Define</a>
+                            <a class="dropdown-item" [routerLink]="['/referencedata/insert']" data-dismiss="modal">Manage</a>
+                            <a class="dropdown-item" [routerLink]="['/referencedata/upload']" data-dismiss="modal">Upload File</a>
+                            <a class="dropdown-item" [routerLink]="['/referencedata/accountsetup']" data-dismiss="modal">Chart Of Account</a>
+                            <a class="dropdown-item" [routerLink]="['/referencedata/orgsetup']" data-dismiss="modal">Organisations</a>
+                            <a class="dropdown-item" [routerLink]="['/referencedata/excsetup']" data-dismiss="modal">Exchange Rate</a>
+
+                        </div>
+                    </li>
+
+
+                    <li class="dropdown" style=" height: 42px;">
+                        <a class=" dropdown-toggle" id="rule_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/ac.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Rule Engine</a>
+                        <i class="fas fa-angle-right" style="margin-left: 46%"></i>
+
+                        <div class="dropdown-menu" aria-labelledby="rule_dropdown">
+                            <a [routerLink]="['/rules/createrule']" class="dropdown-item" data-dismiss="modal">Create Rule</a>
+                            <!-- <a [routerLink]="['/rules/managerule']" [routerLinkActive]="['active']" data-dismiss="modal">Manage Rule</a> -->
+                            <a [routerLink]="['/rules/rulelist']" class="dropdown-item" data-dismiss="modal">Rule List</a>
+                            <a [routerLink]="['/rules/testrule']" class="dropdown-item" data-dismiss="modal">Test Rule</a>
+                            <a [routerLink]="['/rules/rulelookup']" class="dropdown-item" data-dismiss="modal">Rule Lookups</a>
+                        </div>
+                    </li>
+
+
+                    <li class="dropdown" style=" height: 42px;">
+                        <a class=" dropdown-toggle" id="financial_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/data.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Platform Data Defination</a>
+                        <i class="fas fa-angle-right" style="margin-left: 12%"></i>
+
+                        <div class="dropdown-menu " aria-labelledby="financial_dropdown">
+                            <a [routerLink]="['/platformdefinition/fields']" class="dropdown-item" data-dismiss="modal">Fields</a>
+                            <a [routerLink]="['/platformdefinition/ip']" class="dropdown-item" data-dismiss="modal">Involved Party</a>
+                            <a [routerLink]="['/platformdefinition/sal']" class="dropdown-item" data-dismiss="modal">Arrangement</a>
+                            <a [routerLink]="['/platformdefinition/journal']" class="dropdown-item" data-dismiss="modal">Journal Ledger</a>
+                            <a [routerLink]="['/platformdefinition/audit']" class="dropdown-item" data-dismiss="modal">Audit</a>
+
+                        </div>
+                    </li>
+
+                    <li class="dropdown" style=" height: 42px;">
+                        <a class=" dropdown-toggle" id="financial_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/de.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Source Defination</a>
+                        <i class="fas fa-angle-right" style="margin-left: 30%"></i>
+
+                        <div class="dropdown-menu " aria-labelledby="financial_dropdown">
+                            <a [routerLink]="['/source/registerSource']" class="dropdown-item" data-dismiss="modal">Source Registration</a>
+                            <a [routerLink]="['/source/sourceFields']" class="dropdown-item" data-dismiss="modal">Source Business Terms</a>
+                            <a [routerLink]="['/source/eventlayout']" class="dropdown-item" data-dismiss="modal">Source Event Layout</a>
+                            <a [routerLink]="['/source/sourceEvents']" class="dropdown-item" data-dismiss="modal">Source Events</a>
+
+                        </div>
+                    </li>
+
+
+                    <li class="dropdown" style="height: 42px;">
+                        <a class=" dropdown-toggle" id="financial_dropdown" data-toggle="dropdown" style="color: black;text-decoration: none;cursor: pointer;">
+                            <img src="./assets/img/ad.png" class="rounded-circle" style="  height: 40px; width: 50px">&nbsp;Manual Adjustment</a>
+                        <i class="fas fa-angle-right" style="margin-left: 24%"></i>
+
+                        <div class="dropdown-menu " aria-labelledby="financial_dropdown">
+
+                            <a [routerLink]="['/adjustment/journaladjust']" class="dropdown-item" data-dismiss="modal">Journal</a>
+                            <a [routerLink]="['/adjustment/eventadjust']" class="dropdown-item" data-dismiss="modal">Event</a>
+
+                            <a [routerLink]="['/adjustment/manual-upload']" class="dropdown-item" data-dismiss="modal">Manual Upload</a>
+
+                        </div>
+                    </li>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

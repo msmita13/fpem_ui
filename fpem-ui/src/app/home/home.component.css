@@ -1,0 +1,54 @@
+
+.page-header {
+    background-color: rgb(183, 183, 184);
+    background-position: center center;
+    background-size: cover;
+    min-height: 100vh !important;
+    max-height: 999px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+ 
+.title-brand {
+    max-width: 730px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    color: #FFFFFF;
+    display: block;
+}
+
+.col {
+   
+    flex-basis: 0;
+  
+    flex-grow: 1;
+    max-width: 100%;}
+
+.row {
+ 
+    display: flex;
+
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+

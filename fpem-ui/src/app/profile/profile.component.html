@@ -1,0 +1,133 @@
+     
+
+
+   
+    
+<div class="page-header header-filter" data-parallax="true" style="background-image:url('./assets/img/login-image.jpg');"></div>
+<div class="main main-raised">
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                   <div class="profile">
+                        <div class="avatar">
+                            <!-- <img src="./assets/img/new_logo.png" class="img-raised" width="150" height="150"> -->
+                    <img [src]="imgURL" class="img-raised" width="150" height="150">
+                    <div class="name">
+                            <h3 class="title">{{profile.first_name}} {{profile.last_name}}</h3>
+                            <h5 class="des">{{profile.designation}}</h5>
+                    
+                    </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="description text-center">
+                    
+                    <form class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-6" style="border-right: 1px solid #eee;">
+                
+                
+                
+                                  
+                
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-lg-4 control-label" ><b>Email:</b></label>
+                                            <div class="col-lg-8">
+                                                <p> {{profile.email}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-lg-4 control-label"><b>Work Phone No:</b></label>
+                                                <div class="col-lg-8">
+                                  <p> {{profile.work_phone_no_country_cd}} {{profile.work_phone_no}}</p>
+                               </div>
+                                            </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-lg-4 control-label" ><b>Address1:</b></label>
+                                            <div class="col-lg-8">
+                                                <p> {{profile.address1}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-lg-4 control-label" ><b>Country:</b></label>
+                                            <div class="col-lg-8">
+                                                <p> {{profile.country}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-lg-4 control-label"><b>Postal Code:</b></label>
+                                            <div class="col-lg-8">
+                                                <p> {{profile.postal_code}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="col-md-6">
+                <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-lg-4 control-label"><b>Work Email:</b></label>
+                                            <div class="col-lg-8">
+                                                <p> {{profile.work_email}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-lg-4 control-label" ><b>Address2:</b></label>
+                                            <div class="col-lg-8">
+                                                <p> {{profile.address2}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-lg-4 control-label"><b>State:</b></label>
+                                            <div class="col-lg-8">
+                                                <p> {{profile.state}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-lg-4 control-label"><b>City:</b></label>
+                                                <div class="col-lg-8">
+                                                    <p> {{profile.city}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button  style="width:100px;margin-left: 46%;margin-top: 2%" class="btn btn-info" (click)="editProfile()">Edit</button>
+                             
+                            </div>
+                        </form>
+            </div>
+          
+
+    
+        </div>
+    </div>
+</div>
+
+
+
+
+

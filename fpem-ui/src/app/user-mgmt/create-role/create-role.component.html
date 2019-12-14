@@ -1,0 +1,143 @@
+<div class=" table-container ">
+
+        <div class="row">
+            <div class="col-4">
+                        <mat-form-field style="margin-left: 2%">
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4 text-center">
+                        <h6 >CREATE ROLE</h6>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-link" data-toggle="modal" data-target="#createRole" data-backdrop="false" style="float: right;margin-top: 1%"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Create New Role</button>
+            
+                    </div>
+                </div>
+    <div class="example-container  mat-elevation-z1">
+      <table style="width: 100%" mat-table [dataSource]="dataSource" matSort >
+            <ng-container matColumnDef="role_name" sticky>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Name</b>
+                </th>
+                <td mat-cell flex-stretch *matCellDef="let element">
+                    {{element.role_name}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="update">
+                <th mat-header-cell *matHeaderCellDef>
+                    <b>Update</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                    <button class="btn btn-warning" (click)="clickUpdate(element,i)" data-toggle="modal" data-target="#updateRole" data-backdrop="false"><i class="fas fa-edit"></i></button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>
+                    <b>Delete</b></th>
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                    <button class="btn btn-danger" (click)="deleteRole(element,i)"><i class="fas fa-trash"></i></button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    
+    </div>
+    </div>
+    
+    
+    <div class="modal" id="createRole">
+        <div class="modal-dialog  modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Role</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding-left: 15%">
+                    <div class="row">
+                        <label class="col-lg-2 control-label" style="font-size: 15px ;padding-top: 1%"><b>Select Components:</b></label>
+                        <div class="col-lg-8">
+    
+                            <ng-select [items]="allComp" bindLabel="interface_name" bindValue="id" [multiple]="true" placeholder="Select Components" [(ngModel)]="selectedComp" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="true" name="role">
+    
+    
+    
+                            </ng-select>
+    
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-lg-2 control-label" style="font-size: 15px ;padding-top: 1%"><b>Whats is Role Name:</b></label>
+                        <div class="col-lg-8">
+    
+                            <input class="form-control" [(ngModel)]="role_name">
+                        </div>
+                    </div>
+                    <br>
+    
+    
+                </div>
+    
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" (click)="addNewRole()">Add</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <ngx-spinner type="ball-atom">
+        <p style="color: white"> Loading... </p>
+    </ngx-spinner>
+    
+    <div class="modal" id="updateRole">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+    
+    
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Role</h4>
+                </div>
+    
+    
+                <div class="modal-body" style="padding-left: 15%">
+                    <div class="row">
+                        <label class="col-lg-2 control-label" style="font-size: 15px ;padding-top: 1%"><b>Selected Components:</b></label>
+                        <div class="col-lg-8">
+    
+                            <ng-select [items]="allComp" bindLabel="interface_name" bindValue="id" [multiple]="true" placeholder="Select Components" [(ngModel)]="selectedComp" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="true" name="role">
+    
+    
+    
+                            </ng-select>
+    
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-lg-2 control-label" style="font-size: 15px ;padding-top: 1%"><b> Role Name:</b></label>
+                        <div class="col-lg-8">
+    
+                            <input class="form-control" [(ngModel)]="role_name">
+                        </div>
+                    </div>
+                    <br>
+    
+    
+                </div>
+    
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="updateRole()">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+    
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,59 @@
+#option11 {
+    margin-top: 1px;
+    border: black;
+}
+
+.container {
+    overflow-y: auto;
+}
+
+#ii {
+    width: 20%;
+    margin-left: 34%;
+    margin-top: 30px;
+}
+
+#event {
+    width: 35%;
+    margin-top: 25px;
+}
+
+.mat-elevation-z8 {
+    width: 100%;
+    margin-top: 2px;
+}
+
+.marginRow {
+    margin: 0px !important;
+    margin-bottom: 2px
+}
+
+#thenfield {
+    margin-top: 15px
+}
+
+#thenfields {
+    margin-top: 15px;
+    /* margin-left: 80px */
+}
+
+#arrow {
+    margin-left: 15px
+}
+
+.mat-row:nth-child(even) {
+    background-color: rgb(242, 233, 243);
+}
+
+.mat-row:nth-child(odd) {
+    background-color: rgba(235, 238, 240, 0.075);
+}
+/* #expansion-body{
+    max-height: 250px !important;
+    overflow: auto !important;
+ 
+} */
+mat-expansion-panel{
+    margin-left: 2%;
+    margin-right: 2%
+}

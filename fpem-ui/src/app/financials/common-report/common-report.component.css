@@ -1,0 +1,130 @@
+#modal {
+    border: 2px solid;
+    resize: both;
+    overflow: auto;
+}
+
+#delete {
+    width: 45px;
+}
+
+#plus {
+    width: 45px;
+}
+
+::ng-deep .mat-select-arrow-wrapper {
+    background-color: blue
+}
+
+::ng-deep .mat-select-arrow {
+    color: white
+}
+
+::ng-deep .mat-datepicker-toggle-default-icon {
+    color: blue
+}
+
+.content {
+    margin-bottom: 10%;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.mat-form-field {
+    width: 180px
+}
+
+.mat-select-underline {
+    background-color: blue
+}
+
+
+/* ::ng-deep .ng-select .ng-dropdoen-panel{
+    background-color: blue;
+   
+} */
+
+
+/* .mat-option{
+    background-color: rgb(223, 242, 248);
+    font-size: 1.5em;
+} */
+
+.mat-cell .flex-stretch {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    /* align-items center so that cell content is vertically centered */
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    font-size: 14px;
+    min-height: 48px;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    align-items: center;
+}
+
+.right.mat-header-cell {
+    text-align: right;
+}
+
+.right.mat-cell {
+    text-align: right;
+}
+
+.example-container {
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-cell {
+    padding: 5px 75px 5px 0;
+}
+
+.mat-header-cell {
+    padding: 5px 75px 5px 0;
+}
+
+.mat-row:nth-child(even) {
+    background-color: rgb(230, 234, 236);
+}
+
+.mat-row:nth-child(odd) {
+    background-color: rgb(240, 237, 243);
+}
+
+.mat-elevation-z2 {
+    margin-top: 2%
+}
+
+.ng-select.opened>.ng-control .ng-arrow {
+    background-color: blue
+}
+
+button {
+    width: 134.42px;
+    height: 35px;
+    font-size: 14px;
+}
+
+mat-expansion-panel {
+    margin-left: 2%;
+    margin-right: 2%
+}
+
+table.pvtTable {
+    font-size: 8pt;
+    text-align: left;
+    border-collapse: collapse;
+    width: 96%;
+    margin-left: 2%;
+}

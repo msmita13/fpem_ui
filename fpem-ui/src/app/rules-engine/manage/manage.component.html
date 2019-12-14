@@ -1,0 +1,105 @@
+<div class="mat-elevation-z2">
+<div class="row">
+
+    <div style="width:10%;margin-left:35%;margin-top: 1%; " class="col-2">
+        <mat-label><b>
+                <h4>Select Layout:</h4>
+            </b></mat-label>
+    </div>
+    <div style="width:20%;margin-top: 1%">
+       <select [(ngModel)]="this.selectedlayout" (change)="selectLayouts()" name="LayoutSelect"class="form-control" >
+
+                <option *ngFor="let eventLayout of eventLayouts;let i=index" [(ngValue)]="eventLayout">{{eventLayout.event_layout_name}}
+                </option>
+            </select> 
+
+  <!--       <mat-form-field>
+
+            <mat-select [(ngModel)]="this.selectedlayout" (selectionChange)="selectLayouts()">
+                <mat-option *ngFor="let eventLayout of eventLayouts;let i=index" [value]="eventLayout">
+                    <b>  {{eventLayout.file_name}}</b>
+                </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+       <!-- <ng-select [items]="eventLayouts" bindLabel="file_name" bindValue="file_name" [multiple]="false"  placeholder="Select Layout" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false" name="eventLayout"
+        (change)="selectLayouts($event)">
+
+    </ng-select>  -->
+    
+    </div>
+</div>
+<div class="row" style="margin-bottom: 1%;">
+
+    <div style="width:10% ;margin-left:35% ;margin-top: 1%" class="col-2">
+        <mat-label><b>
+                <h4>Select Field:</h4>
+            </b></mat-label>
+    </div>
+    <div   style="width:20%;margin-top: 1%">
+         <!-- <mat-form-field>
+
+            <mat-select [(ngModel)]="this.selectedfield" multiple>
+                <mat-option *ngFor="let field of fields" [value]="field" (click)="selectfield()" class="form-control">
+                    {{field}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>  -->
+        <ng-select [items]="fields" bindLabel="field" bindValue="field" [multiple]="true" [(ngModel)]="this.selectedfield" placeholder="Select Fields" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false" name="selectfield"
+        (change)="selectfield($event)">
+
+    </ng-select>
+    </div>
+
+    <!-- <div style="width:40%;margin-top: 8px">
+        <select [(ngModel)]="this.selectedfield" multiple (change)="selectfield()" class="form-control">
+           <option  selected> {{selected}}</option>
+            <option *ngFor="let field of fields" >{{field}}
+            </option>
+        </select>
+    </div> -->
+</div>
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="example-container ">
+            <div class="row">
+                <div style="width: 32%; margin-left: 2%">
+                    <mat-form-field style="margin-left: 2%">
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+                    </mat-form-field>
+                </div>
+
+
+
+            </div>
+
+
+
+            <table style="width:100%" mat-table [dataSource]="dataSource" matSort>
+
+
+                <ng-container matColumnDef="priority">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Priority</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.priority}} </td>
+                </ng-container>
+                <ng-container matColumnDef="rule_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Rule Name</b> </th>
+                    <td mat-cell flex-stretch *matCellDef="let element"> {{element.rule_name}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </div>
+</div>
+</div>

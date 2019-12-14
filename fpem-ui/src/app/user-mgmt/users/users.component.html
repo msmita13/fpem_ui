@@ -1,0 +1,54 @@
+<div class=" table-container ">
+    <div class="row">
+<div class="col-4">
+            <mat-form-field style="margin-left: 2%">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+        <div class="col-4 text-center">
+            <h6 >TOTAL USERS </h6>
+        </div>
+       
+    </div>
+ <div class="example-container mat-elevation-z1 ">
+     
+        <table style="width: 100%" mat-table [dataSource]="dataSource" matSort class="">
+            <ng-container matColumnDef="name" sticky>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Name</b>
+                </th>
+                <td mat-cell flex-stretch *matCellDef="let element">
+                    {{element.first_name}} {{element.last_name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Email</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element">
+                    {{element.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Phone No.</b> </th>
+                <td mat-cell flex-stretch *matCellDef="let element">
+                    {{element.work_phone_no}} </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>
+                    <b>Delete</b></th>
+                <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                    <button class="btn btn-danger" (click)="deleteUser(element,i)"><i class="fas fa-trash"></i></button>
+                </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    
+    </div>
+
+</div> 
+
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

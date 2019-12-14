@@ -1,0 +1,75 @@
+
+
+input {
+    margin-bottom: 4%
+}
+
+h5 {
+    margin-left: 5%
+}
+
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+
+
+.example-container {
+    max-height: 720px;
+    overflow: auto;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    font-size: 16px;
+    color: white;
+}
+
+.mat-cell {
+    padding: 5px 10px 5px 0;
+}
+
+.mat-header-cell {
+    padding: 5px 10px 5px 0;
+}
+
+.mat-row:nth-child(even) {
+    background-color: rgb(238, 224, 226);
+}
+
+.mat-row:nth-child(odd) {
+    background-color: white;
+}
+
+#header {
+    background-color: rgb(58, 183, 255);
+}
+
+#btn {
+    background-color: rgb(127, 221, 245);
+}
+
+
+tr {
+    background-color: rgb(58, 183, 255);
+}
+
+th {
+    height: 2px;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    color: white !important
+}
+

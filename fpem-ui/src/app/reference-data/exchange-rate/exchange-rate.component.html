@@ -1,0 +1,248 @@
+<div class=" table-container ">
+
+
+   
+    <div class="row">
+            <div class="col-4">
+                            <mat-form-field style="margin-left: 2%">
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h6 style="   color: #ff9966">EXCHANGE RATE</h6>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-link" data-toggle="modal" data-target="#add" data-backdrop="false" style="float: right;margin-top: 1%" ><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add New</button>
+                
+                        </div>
+                    </div>
+<div class="example-container mat-elevation-z1">
+    <table mat-table [dataSource]="dataSource" matSort >
+
+        <ng-container matColumnDef="from_currency">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>From Currency</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.from_currency}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="to_currency">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>To Currency</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.to_currency }} </td>
+        </ng-container>
+        <ng-container matColumnDef="rate">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Rate</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.rate }} </td>
+
+        </ng-container>
+        <ng-container matColumnDef="eff_date">
+            <th mat-header-cell *matHeaderCellDef class="right" mat-sort-header> <b>Effective Date</b> </th>
+            <td mat-cell flex-stretch *matCellDef="let element" class="right">
+                {{ element.eff_date }} </td>
+
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef><b>Edit</b> </th>
+
+            <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+
+                <button class="btn btn-warning" type="button" id="btn1" data-toggle="modal" data-target="#editDetail" data-backdrop="false" (click)="openUpdateExchangeRate(element,i)"><i class="fa fa-edit"
+                        aria-hidden="true"></i></button>
+
+            </td>
+        </ng-container>
+
+
+
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef><b>Delete</b> </th>
+
+            <td mat-cell flex-stretch *matCellDef="let element; let i = index;">
+                <button class="btn btn-danger" (click)="deleteExchangeRate(element,i)"><i class="fa fa-trash"
+                        aria-hidden="true"></i></button>
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+</div>
+
+
+
+
+<div class="modal" id="editDetail">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Echange Rate</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-left: 15%">
+
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>From Currency :</b></label>
+                        </div>
+                        <!-- <div class="col-5">
+                            <input class="form-control" name="accountnumber" [(ngModel)]="obj.from_currency" placeholder="From Currency">
+                        </div> -->
+                        <div class="col-5">
+                            <select class="form-control" name="accountnumber" [(ngModel)]="obj.from_currency" placeholder="From Currency">
+<option value="INR" >INR</option>
+<option value="USD">USD</option>
+<option value="HKD">HKD</option>
+<option value="CAD">CAD</option>
+<option value="GBP">GBP</option>
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>TO Currency :</b></label>
+                        </div>
+                        <!-- <div class="col-5">
+                            <input class="form-control" name="accountdescription" [(ngModel)]="obj.to_currency" placeholder="To Currency">
+                        </div> -->
+                        <div class="col-5">
+
+                            <select class="form-control" name="accountdescription" [(ngModel)]="obj.to_currency" placeholder="To Currency">
+                                <option value="INR" >INR</option>
+                                <option value="USD">USD</option>
+                                <option value="HKD">HKD</option>
+                                <option value="CAD">CAD</option>
+                                <option value="GBP">GBP</option>
+                                
+                                
+                                                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Rate :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="accounttype" [(ngModel)]="obj.rate" placeholder="Double">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Date :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="onbalance" [(ngModel)]="obj.eff_date" placeholder="yyyy-mm-dd">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="updateRow()">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="add">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Echange Rate</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-left: 15%">
+
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>From Currency :</b></label>
+                        </div>
+                        <!-- <div class="col-5">
+                            <input class="form-control" name="accountnumber" [(ngModel)]="obj.from_currency" placeholder="From Currency">
+                        </div> -->
+                        <div class="col-5">
+                            <select class="form-control" name="accountnumber" [(ngModel)]="obj.from_currency" placeholder="From Currency">
+                                <option value="INR" >INR</option>
+                                <option value="USD">USD</option>
+                                <option value="HKD">HKD</option>
+                                <option value="CAD">CAD</option>
+                                <option value="GBP">GBP</option>
+                                
+                                
+                                                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>TO Currency :</b></label>
+                        </div>
+                        <!--  <div class="col-5">
+                            <input class="form-control" name="accountdescription" [(ngModel)]="obj.to_currency" placeholder="To Currency">
+                        </div> -->
+                        <div class="col-5">
+                            <select class="form-control" name="accountdescription" [(ngModel)]="obj.to_currency" placeholder="To Currency">
+                                <option value="INR" >INR</option>
+                                <option value="USD">USD</option>
+                                <option value="HKD">HKD</option>
+                                <option value="CAD">CAD</option>
+                                <option value="GBP">GBP</option>
+                                
+                                
+                        </select>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b>Rate :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="accounttype" [(ngModel)]="obj.rate" placeholder="Double">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <label><b> Date :</b></label>
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control" name="onbalance" [(ngModel)]="obj.eff_date" placeholder="yyyy-mm-dd">
+
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="addRow()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner type="ball-atom">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

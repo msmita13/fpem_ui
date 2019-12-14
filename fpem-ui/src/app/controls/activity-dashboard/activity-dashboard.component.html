@@ -1,0 +1,74 @@
+
+    <h6 style="text-align: center">ACTIVITY DASHBOARD</h6>
+
+<div class="row">
+    <div class="col-3">
+
+    </div>
+
+    <div class="col-3">
+
+        <ng-select [items]="ppdArr" bindLabel="date" bindValue="date" [multiple]="false" placeholder="Select Processing Date" [(ngModel)]="selectedPpd" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="true" (change)="changeppd()" name="ppd"
+            style="margin-top: 5%">
+
+        </ng-select>
+    </div>
+
+    <div class="col-3">
+
+        <ng-select [items]="runArr" bindLabel="run_id" bindValue="run_id" [multiple]="false" placeholder="Select Run Id" [(ngModel)]="selectedRunId" [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="true" (change)="changeRun()" name="runid"
+            style="margin-top: 5%">
+
+        </ng-select>
+    </div>
+
+    <div class="col-3">
+        <button style=" margin-top: 4%" class="btn  btn-outline-info" (click)="getAllActivity()">
+            Refresh
+
+        </button>
+    </div>
+</div>
+
+<div class="row" style="margin-right: 2%;margin-left:2%">
+    <div class="col-2">
+        <mat-form-field style="margin-left: 2%">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div>
+</div>
+
+
+
+<div class="example-container mat-elevation-z1">
+    <table style="width: 100%" mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="process_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Process</b>
+            </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.process_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="organisation_code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Organisation</b>
+            </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.organisation_code}} </td>
+        </ng-container>
+        <ng-container matColumnDef="num_of_records">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Count</b>
+            </th>
+            <td mat-cell flex-stretch *matCellDef="let element">
+                {{element.num_of_records}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+</div>

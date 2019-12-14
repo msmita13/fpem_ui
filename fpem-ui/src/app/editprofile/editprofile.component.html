@@ -1,0 +1,152 @@
+<div class="page-header header-filter" data-parallax="true" style="background-image:url('./assets/img/login-image.jpg');">
+
+
+
+
+</div>
+<div class="main main-raised">
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                    <div class="profile">
+                        <div class="avatar">
+                            <img [src]="imgURL" class="img-raised" width="150" height="150">
+                            <div class="row">
+                                <div class="col-6" style="margin-left: 20%">
+                                    <input #file type="file" name="pimage" ng2FileSelect [uploader]="uploader" class="form-control" style="border-color: black" (change)="onFileUpload($event,file.files)">
+                                </div>
+                                <div class="col-3">
+                                    <button type="button" [disabled]="!uploader.getNotUploadedItems().length" class="btn btn-info" (click)='Upload()'><i class="fa fa-upload" aria-hidden="true">&nbsp;</i>Upload</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="description text-center">
+
+                <form class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6" style="border-right: 1px solid #eee;">
+                            <div class="row">
+
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>First Name:</b></label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="profile.first_name" type="text" class="form-control" name="firstname" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Email:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="email" [(ngModel)]="profile.email" class="form-control" name="emailid" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Work Phone No:</b></label>
+                                <div class="col-lg-8 row">
+                                    <div class="col-5"><select [(ngModel)]="profile.work_phone_no_country_cd" class="form-control" name="workcountrycode">
+                                    <option *ngFor="let phone_code of  country_code">{{phone_code.dial_code}}</option>
+                                </select></div>
+                                    <div class="col"><input type="text" [(ngModel)]="profile.work_phone_no" class="form-control" name="workphoneno" /></div>
+
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Address 1:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="profile.address1" class="form-control" name="address" />
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Country:</b></label>
+                                <div class="col-lg-8">
+                                    <select class="form-control" [(ngModel)]="profile.country" (change)="select_country($event)" name="country">
+                                    <option selected disabled> Select Country</option>
+                                    <option *ngFor="let country of  country_arr, let i = index">{{country}}</option>
+                                </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Postal Code:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="profile.postal_code" class="form-control" name="postalcode" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>City:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="profile.city" class="form-control" name="city" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Last Name:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="profile.last_name" class="form-control" name="lastname" />
+                                </div>
+                            </div>
+                            <br>
+
+
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Work Email:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="profile.work_email" class="form-control" name="workemail" />
+                                </div>
+                            </div>
+                            <br>
+
+
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Address 2:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="profile.address2" class="form-control" name="address2" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>Designation:</b></label>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="profile.designation" class="form-control" name="designation" />
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <label class="col-lg-4 control-label" style="font-size: 15px ;"><b>State:</b></label>
+                                <div class="col-lg-8">
+                                    <select class="form-control" [(ngModel)]="profile.state" name="state">
+                                    <option selected disabled> Select State</option>
+                                    <option *ngFor="let state of  state_arr" >{{state}}</option>
+                                </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button style="width:100px;margin-left: 46%;margin-top: 2%" class="btn btn-info" (click)="Save()">Save</button>
+
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<ngx-spinner type="ball-atom">Loading...</ngx-spinner>
